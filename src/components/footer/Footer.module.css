@@ -1,0 +1,98 @@
+.footer {
+	background-color: #f9fbff;
+	color: #0a1128;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.topSection {
+	width: 100%;
+	max-width: 1200px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
+
+.logo img {
+	height: 50px;
+}
+
+.nav {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.nav a {
+	color: #0a1128;
+	text-decoration: none;
+	font-size: 16px;
+}
+
+.nav .active {
+	color: #ff6f61;
+	font-weight: bold;
+}
+
+.nav a:hover {
+	text-decoration: underline;
+}
+
+.checkComponent {
+	text-align: center;
+}
+
+.checkComponent p {
+	margin: 0 0 10px;
+	font-size: 16px;
+}
+
+.checkComponent a {
+	color: #0a1128;
+	text-decoration: underline;
+}
+
+.checkComponent input {
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	margin-bottom: 10px;
+}
+
+.checkComponent button {
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #0a1128;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.checkComponent button:hover {
+	background-color: #080f26;
+}
+
+.contacts {
+	text-align: left;
+	font-size: 16px;
+}
+
+.bottomSection {
+	width: 100%;
+	text-align: center;
+	padding-top: 10px;
+	border-top: 1px solid #ddd;
+}
+
+.bottomSection span {
+	display: block;
+	font-size: 14px;
+	color: #666;
+}
