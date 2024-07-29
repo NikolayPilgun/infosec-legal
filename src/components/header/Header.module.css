@@ -1,61 +1,72 @@
 .header {
+	width: 100%;
+}
+
+.container {
+	padding: 20px 40px 0px;
 	background-color: #0a1128;
-	color: white;
-	padding: 20px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	color: #fff;
 }
 
 .topSection {
-	width: 100%;
-	max-width: 1200px;
+	height: 70px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
+.navigationBlockLogo {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
 .logo img {
-	height: 50px;
+	width: 46px;
+	height: 47px;
 }
 
 .nav {
 	display: flex;
-	gap: 30px;
+	align-items: center;
+	gap: 20px;
 }
 
 .nav a {
-	color: white;
-	text-decoration: none;
 	font-size: 16px;
+	color: #d3d3d3;
+	text-decoration: none;
+	transition: color 0.3s ease;
 }
 
-.nav a:hover,
-.active {
-	text-decoration: underline;
+.nav a:hover {
+	color: #fff;
+}
+
+.nav a.active {
+	font-weight: bold;
+	border-bottom: 2px solid #d3d3d3;
+}
+.navImg {
+	margin-left: 5px;
+	width: 20px;
+	height: 20px;
 }
 
 .contactInfo {
 	text-align: right;
 }
 
-.bottomSection {
-	width: 100%;
-	max-width: 1200px;
-	text-align: left;
-	padding: 40px 0;
+.contactInfo span {
+	display: block;
 }
-
-.titleContainer {
-	max-width: 600px;
-}
-
-h1 {
-	font-size: 36px;
-	margin: 0;
-}
-
-h2 {
+.contactInfo span:first-child {
 	font-size: 18px;
-	margin: 10px 0 0;
+	color: #fff;
+	margin-bottom: 7px;
+}
+
+.contactInfo span:nth-child(2) {
+	font-size: 14px;
+	color: #696969;
 }

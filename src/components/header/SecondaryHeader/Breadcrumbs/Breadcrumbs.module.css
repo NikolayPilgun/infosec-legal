@@ -1,0 +1,32 @@
+.breadcrumbs {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.breadcrumbItem a,
+.currentBreadcrumbItem a {
+	color: #666;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.breadcrumbItem a:hover,
+.currentBreadcrumbItem a:hover {
+	color: #888;
+}
+
+.currentBreadcrumbItem a {
+	font-weight: bold;
+	color: #fff;
+}
+
+.homeBreadcrumbItem {
+	color: #666;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.homeBreadcrumbItem:hover {
+	color: #888;
+}

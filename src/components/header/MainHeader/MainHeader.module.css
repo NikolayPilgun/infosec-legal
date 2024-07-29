@@ -1,0 +1,32 @@
+.mainHeader {
+	height: 300px;
+	overflow: hidden;
+	background-color: #0a1128;
+	color: #fff;
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+.titleContainer {
+	max-width: 680px;
+	text-align: left;
+}
+
+.titleContainer h1 {
+	font-size: 44px;
+	line-height: 50px;
+	font-weight: 400;
+	margin-bottom: 15px;
+}
+
+.titleContainer h2 {
+	font-size: 14px;
+	line-height: 16px;
+	font-weight: 400;
+	color: rgb(159, 159, 159);
+}
+.IMGContainer {
+	position: absolute;
+	top: 0px;
+	right: 20px;
+}
