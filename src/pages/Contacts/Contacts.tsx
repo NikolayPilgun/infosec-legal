@@ -1,38 +1,107 @@
 import React from "react";
 import styles from "./Contacts.module.css";
 
+const documents = [
+	{ title: "Устав организации", fileType: "PDF", url: "/docs/charter.pdf" },
+	{
+		title: "Карточка предприятия в несколько строк",
+		fileType: "DOCX",
+		url: "/docs/card.docx",
+	},
+	{
+		title: "Лицензия на осуществление деятельности",
+		fileType: "JPG",
+		url: "/docs/license.jpg",
+	},
+	{
+		title: "Карточка предприятия в несколько строк",
+		fileType: "DOCX",
+		url: "/docs/card.docx",
+	},
+	// Добавьте остальные документы
+];
+
 const Contacts: React.FC = () => {
 	return (
 		<div className={styles.contactsContainer}>
-			<h2>Contact Us</h2>
-			<p>
-				We are here to assist you with any inquiries you may have. Please feel
-				free to reach out to us through the following contact channels:
-			</p>
-			<h3>Head Office</h3>
-			<p>
-				123 Security Blvd, Suite 400
-				<br />
-				Saint Petersburg, Russia
-			</p>
-			<h3>Email</h3>
-			<p>
-				General Inquiries: info@security-committee.org
-				<br />
-				Support: support@security-committee.org
-			</p>
-			<h3>Phone</h3>
-			<p>
-				Main Office: +7 (812) 240-9297
-				<br />
-				Support Line: +7 (812) 240-9298
-			</p>
-			<h3>Business Hours</h3>
-			<p>
-				Monday - Friday: 9 AM - 6 PM
-				<br />
-				Saturday & Sunday: Closed
-			</p>
+			<header className={styles.header}>
+				<h1>Контактная информация</h1>
+				<p>Главная / Контакты</p>
+			</header>
+
+			<section className={styles.contactsSection}>
+				<div className={styles.mapContainer}>
+					<iframe
+						src="https://www.google.com/maps/embed?pb=..."
+						width="100%"
+						height="450"
+						frameBorder="0"
+						style={{ border: 0 }}
+						allowFullScreen={false}
+						aria-hidden="false"
+						tabIndex={0}
+					/>
+					<div className={styles.contactInfo}>
+						<p>
+							Для получения информации вы можете позвонить в справочную службу
+							(звонки принимаются в рабочее время)
+						</p>
+						<ul>
+							<li>
+								<strong>Адрес:</strong> 000000, г. Санкт-Петербург, ул. Пушкина,
+								д.24, офис 206
+							</li>
+							<li>
+								<strong>Телефон:</strong> +7 (812) 240-9297
+							</li>
+							<li>
+								<strong>Почта:</strong> info@kpib.ru
+							</li>
+							<li>
+								<strong>Понедельник - Пятница:</strong> с 8:00 до 20:00
+							</li>
+							<li>
+								<strong>Суббота - Воскресенье:</strong> Выходные
+							</li>
+						</ul>
+						<button>Проверить организацию On-line</button>
+					</div>
+				</div>
+			</section>
+
+			<section className={styles.documentsSection}>
+				<h2>Уставные документы</h2>
+				<div className={styles.documentsGrid}>
+					{documents.map((doc, index) => (
+						<div key={index} className={styles.documentCard}>
+							<div className={styles.documentIcon}>
+								<img
+									src={`/icons/${doc.fileType.toLowerCase()}.svg`}
+									alt={doc.fileType}
+								/>
+							</div>
+							<div className={styles.documentTitle}>
+								<a href={doc.url} download>
+									{doc.title}
+								</a>
+							</div>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<section className={styles.questionSection}>
+				<h2>У вас есть вопрос?</h2>
+				<form className={styles.questionForm}>
+					<input type="text" placeholder="Ваше Имя" required />
+					<input type="text" placeholder="Номер телефона или E-mail" required />
+					<textarea
+						placeholder="Опишите ваш вопрос как можно подробнее"
+						required
+					></textarea>
+					<button type="submit">Отправить</button>
+				</form>
+			</section>
 		</div>
 	);
 };

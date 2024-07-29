@@ -126,7 +126,7 @@ table {
 /* базовые стили  */
 html,
 body {
-	max-width: 1442px;
+	max-width: 1920px;
 	height: 100vh;
 	font-family: "Roboto", sans-serif;
 	color: #000000;

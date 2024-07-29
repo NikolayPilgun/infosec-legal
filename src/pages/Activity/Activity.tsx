@@ -1,48 +1,101 @@
 import React from "react";
 import styles from "./Activity.module.css";
 
+const documents = [
+	{ title: "Устав организации", fileType: "PDF", url: "/docs/charter.pdf" },
+	{
+		title: "Карточка предприятия в несколько строк",
+		fileType: "DOCX",
+		url: "/docs/card.docx",
+	},
+	{
+		title: "Лицензия на осуществление деятельности",
+		fileType: "JPG",
+		url: "/docs/license.jpg",
+	},
+	{
+		title: "Карточка предприятия в несколько строк",
+		fileType: "DOCX",
+		url: "/docs/card.docx",
+	},
+	// Добавьте остальные документы
+];
+
+const moreDocuments = [
+	{
+		title: "Устав организации",
+		fileType: "PDF",
+		url: "/docs/more-charter.pdf",
+	},
+	{
+		title: "Карточка предприятия в несколько строк",
+		fileType: "DOCX",
+		url: "/docs/more-card.docx",
+	},
+	// Добавьте остальные документы
+];
+
 const Activity: React.FC = () => {
 	return (
 		<div className={styles.activityContainer}>
-			<h2>Our Activities</h2>
-			<p>
-				The Committee for Information and Legal Security engages in a wide range
-				of activities to promote and ensure data protection and security.
-			</p>
-			<p>
-				We work on developing security policies, providing training and
-				certification for security professionals, conducting research, and much
-				more.
-			</p>
-			<h3>Key Activities</h3>
-			<ul>
-				<li>
-					Policy Development: Creating and implementing robust security
-					policies.
-				</li>
-				<li>
-					Training Programs: Organizing training sessions for professionals in
-					the field.
-				</li>
-				<li>
-					Research: Conducting in-depth research on emerging security threats.
-				</li>
-				<li>
-					Consulting: Offering expert consulting services for organizations.
-				</li>
-			</ul>
-			<h3>Upcoming Events</h3>
-			<p>
-				We regularly organize events, workshops, and seminars to educate and
-				raise awareness about information security. Stay tuned for our upcoming
-				events!
-			</p>
-			<p>
-				For more details about our activities and how you can participate,
-				please visit our events page or contact us.
-			</p>
-			<p>Email: events@security-committee.org</p>
-			<p>Phone: +7 (812) 240-9297</p>
+			<header className={styles.header}>
+				<h1>Документы</h1>
+				<p>Главная / Документы</p>
+			</header>
+
+			<section className={styles.documentsSection}>
+				<h2>Уставные документы</h2>
+				<div className={styles.documentsGrid}>
+					{documents.map((doc, index) => (
+						<div key={index} className={styles.documentCard}>
+							<div className={styles.documentIcon}>
+								<img
+									src={`/icons/${doc.fileType.toLowerCase()}.svg`}
+									alt={doc.fileType}
+								/>
+							</div>
+							<div className={styles.documentTitle}>
+								<a href={doc.url} download>
+									{doc.title}
+								</a>
+							</div>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<section className={styles.documentsSection}>
+				<h2>Ещё категория документов</h2>
+				<div className={styles.documentsGrid}>
+					{moreDocuments.map((doc, index) => (
+						<div key={index} className={styles.documentCard}>
+							<div className={styles.documentIcon}>
+								<img
+									src={`/icons/${doc.fileType.toLowerCase()}.svg`}
+									alt={doc.fileType}
+								/>
+							</div>
+							<div className={styles.documentTitle}>
+								<a href={doc.url} download>
+									{doc.title}
+								</a>
+							</div>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<aside className={styles.sidebar}>
+				<div className={styles.sidebarSticky}>
+					<h2>Выберите нужную вам категорию документов:</h2>
+					<ul>
+						<li>Уставные документы (4)</li>
+						<li>Категория документов какая (17)</li>
+						<li>Ещё документы</li>
+						<li>Какая-то очень длинная категория в несколько строчек (2)</li>
+					</ul>
+				</div>
+			</aside>
 		</div>
 	);
 };
