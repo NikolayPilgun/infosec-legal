@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { NavItem, navItems } from "../../data/navItems";
-import NavIMG from "./../../assets/nav.svg";
 import styles from "./Header.module.css";
 import MainHeader from "./MainHeader/MainHeader";
 import SecondaryHeader from "./SecondaryHeader/SecondaryHeader";
@@ -28,7 +27,6 @@ const Header: React.FC = () => {
 									{item.name}
 								</NavLink>
 							))}
-							<img src={NavIMG} alt="NavIMG" className={styles.navImg} />
 						</nav>
 					</div>
 

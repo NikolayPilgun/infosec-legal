@@ -34,6 +34,7 @@
 
 .nav a {
 	font-size: 16px;
+	line-height: 20px;
 	color: #d3d3d3;
 	text-decoration: none;
 	transition: color 0.3s ease;
@@ -46,11 +47,6 @@
 .nav a.active {
 	font-weight: bold;
 	border-bottom: 2px solid #d3d3d3;
-}
-.navImg {
-	margin-left: 5px;
-	width: 20px;
-	height: 20px;
 }
 
 .contactInfo {

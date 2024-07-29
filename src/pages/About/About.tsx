@@ -1,45 +1,11 @@
 import React from "react";
+import CheckSection from "../../components/about/CheckSection";
 import styles from "./About.module.css";
 
 const About: React.FC = () => {
 	return (
 		<div className={styles.aboutContainer}>
-			<section className={styles.checkSection}>
-				<h3>
-					Проверьте свою организацию онлайн за 1 минуту и получите заключение
-					эксперта по защите персональных данных - бесплатно
-				</h3>
-				<div className={styles.checkForm}>
-					<input type="text" placeholder="ИНН Организации" />
-					<button>Проверить</button>
-				</div>
-			</section>
-
-			<section className={styles.certificationInfo}>
-				<div className={styles.certificationAlert}>
-					<p>
-						На{" "}
-						<a href="#" className={styles.alertLink}>
-							09.08.2023
-						</a>
-						, если ваша организация отсутствует в реестре операторов
-						персональных данных Роскомнадзора, или запись содержит устаревшие
-						данные, вы нарушаете требования закона от 27.07.2006г. № 152-ФЗ "О
-						персональных данных".
-					</p>
-				</div>
-				<div className={styles.certificationDetails}>
-					<div className={styles.detailItem}>
-						<h3>106</h3>
-						<p>Бесплатных мест осталось</p>
-					</div>
-					<div className={styles.detailItem}>
-						<h3>57</h3>
-						<p>Консультаций оказано за апрель</p>
-					</div>
-				</div>
-			</section>
-
+			<CheckSection />
 			<section className={styles.statsSection}>
 				<h3>Признание на федеральном уровне</h3>
 				<p>
