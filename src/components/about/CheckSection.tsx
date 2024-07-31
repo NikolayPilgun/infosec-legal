@@ -47,9 +47,9 @@ const CheckSection: React.FC = () => {
 						<path
 							d="M9 8.61356H9.5C9.77614 8.61356 10 8.83742 10 9.11356V14.7678C10 15.0439 10.2239 15.2678 10.5 15.2678H11M10 5.95187H10.01"
 							stroke="white"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
 						/>
 					</svg>
 
