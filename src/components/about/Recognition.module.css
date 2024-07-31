@@ -1,0 +1,59 @@
+.recognition {
+	padding: 40px 40px;
+}
+
+.title {
+	margin-bottom: 60px;
+}
+
+.recognition h2 {
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 26px;
+	text-align: left;
+	color: #1d3f88;
+	margin-bottom: 16px;
+}
+
+.recognition p {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 26px;
+	text-align: left;
+	color: #000;
+}
+
+.recognition strong {
+	font-weight: bold;
+}
+
+.grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	justify-content: center;
+}
+
+.partnerCard {
+	max-width: 400px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	background: #fff;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	padding: 20px 10px;
+}
+
+.partnerLogo {
+	max-height: 73px;
+	margin-bottom: 16px;
+}
+
+.partnerCard p {
+	font-size: 14px;
+	color: #000;
+	margin: 0;
+}
