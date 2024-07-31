@@ -1,39 +1,41 @@
-/* Awards.module.css */
-
 .container {
-	padding: 40px 40px;
 	background-color: #fcfdff;
+	padding: 40px 40px;
 }
 
 .content {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: repeat(2, auto);
 	gap: 0;
 }
 
 .item {
 	padding: 20px;
+	box-sizing: border-box;
 	text-align: center;
-	border: 1px solid transparent; /* Устанавливаем прозрачную границу по умолчанию */
+	border-bottom: 1px solid black;
 }
 
-/* Общие границы для всех экранов */
-
-/* Левая граница для всех колонок, кроме первой */
-.content .item:not(:nth-child(3n + 1)) {
-	border-left: 1px solid #a0a0a0;
+.item:nth-last-child(-n + 3) {
+	border-bottom: none;
 }
 
-/* Нижняя граница для всех строк, кроме последней */
-.content .item:not(:nth-last-child(-n + 3)):not(:nth-last-child(3)) {
-	border-bottom: 1px solid #a0a0a0;
+.item:nth-child(3n) {
+	border-right: none;
+}
+
+.item:nth-child(3n-2),
+.item:nth-child(3n-1) {
+	border-right: 1px solid black;
+}
+
+.item:last-child {
+	border-right: none;
 }
 
 .infoCard,
 .statItem {
 	padding: 20px;
-	background-color: #ffffff;
 	border-radius: 8px;
 }
 
@@ -66,8 +68,8 @@
 }
 
 .statContainer p {
-	line-height: 44px;
 	font-size: 44px;
+	line-height: 54px;
 	font-weight: 400;
 	color: #001b55;
 }
@@ -81,81 +83,38 @@
 	margin: 0 auto;
 }
 
-/* Адаптивная верстка */
-
-/* Малые экраны (мобильные устройства) */
-@media (max-width: 575.98px) {
-	.content {
-		grid-template-columns: 1fr;
-		grid-template-rows: repeat(6, auto);
-	}
-
-	/* Убираем все границы для мобильных устройств */
-	.item {
-		border: none;
-	}
-
-	/* Добавляем только нижнюю границу для всех элементов, кроме последнего */
-	.item:not(:last-child) {
-		border-bottom: 1px solid #a0a0a0;
-	}
-
-	/* Убираем все левые и правые границы */
-	.item {
-		border-left: none !important;
-		border-right: none !important;
-	}
-}
-
-/* Средние экраны (планшеты) */
-@media (min-width: 576px) and (max-width: 767.98px) {
+@media (max-width: 1024px) {
 	.content {
 		grid-template-columns: repeat(2, 1fr);
-		grid-template-rows: auto;
 	}
 
-	.item {
-		border: none; /* Удаляем все бордеры по умолчанию */
+	.content .item {
+		border: none; /* Убираем все границы у элементов */
 	}
 
-	/* Правая граница у нечетных ячеек, кроме первых ячеек каждого ряда */
-	.content .item:nth-child(odd):not(:nth-child(2n + 1)) {
-		border-right: 1px solid #a0a0a0;
+	.content > .item:nth-last-child(n + 3):not(:last-child) {
+		border-bottom: 1px solid #000; /* Нижняя граница для не последних ячеек */
 	}
 
-	/* Нижняя граница у всех ячеек, кроме последних двух элементов */
-	.content .item:nth-child(-n + 4) {
-		border-bottom: 1px solid #a0a0a0;
+	.item:nth-child(odd) {
+		border-right: 1px solid #000; /* Правый бордер для нечётных ячеек */
 	}
 
-	/* Убираем левую границу у первой ячейки каждого ряда */
-	.item:nth-child(2n + 1):not(:first-child) {
-		border-left: none;
-	}
-
-	/* Добавляем правую границу для первой ячейки второго ряда (третья ячейка) */
-	.content .item:nth-child(3) {
-		border-right: 1px solid #a0a0a0;
+	.item:last-child {
+		border-right: none; /* Убираем правый бордер последней ячейки */
 	}
 }
 
-/* Большие экраны (десктопы) */
-@media (min-width: 768px) {
+@media (max-width: 768px) {
 	.content {
-		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: repeat(2, auto);
+		grid-template-columns: repeat(1, 1fr);
 	}
 
-	/* Общие границы для больших экранов */
-	.item:not(:nth-child(3n + 1)) {
-		border-left: 1px solid #a0a0a0;
+	.content .item {
+		border: none; /* Убирает все границы у элементов */
 	}
 
-	.item:not(:nth-last-child(-n + 3)):not(:nth-last-child(3)) {
-		border-bottom: 1px solid #a0a0a0;
-	}
-
-	.item {
-		border-top: none;
+	.item:not(:last-child) {
+		border-bottom: 1px solid #000; /* Нижняя граница для не последних ячеек */
 	}
 }
