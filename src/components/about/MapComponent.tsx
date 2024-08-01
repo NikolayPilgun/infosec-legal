@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Map, Placemark, YMaps } from "react-yandex-maps";
+import iconSearch from "../../assets/map/icon.svg";
 import styles from "./MapComponent.module.css";
 
 interface City {
 	name: string;
-	count: number;
+	count?: number;
 	coordinates: [number, number];
 }
 
@@ -28,20 +29,42 @@ const MapComponent: React.FC = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedCity, setSelectedCity] = useState<City>(defaultCity);
 
-	const handleSearch = () => {
-		const foundCity = cities.find((city) =>
-			city.name.toLowerCase().includes(searchTerm.toLowerCase())
-		);
-		if (foundCity) {
-			setSelectedCity(foundCity);
-		} else {
-			alert(`Город "${searchTerm}" не найден в списке.`);
+	useEffect(() => {
+		if (!searchTerm) setSelectedCity(defaultCity);
+	}, [searchTerm]);
+
+	const fetchCoordinates = async () => {
+		if (!searchTerm) return;
+
+		try {
+			const response = await fetch(
+				`https://nominatim.openstreetmap.org/search?city=${searchTerm}&format=json&limit=1`
+			);
+			const data = await response.json();
+			if (data.length > 0) {
+				const { lat, lon, display_name } = data[0];
+				const latitude = parseFloat(lat);
+				const longitude = parseFloat(lon);
+
+				if (!isNaN(latitude) && !isNaN(longitude)) {
+					setSelectedCity({
+						name: display_name,
+						coordinates: [latitude, longitude],
+					});
+				} else {
+					alert(`Некорректные координаты для города "${searchTerm}".`);
+				}
+			} else {
+				alert(`Город "${searchTerm}" не найден в базе данных OpenStreetMap.`);
+			}
+		} catch (error) {
+			console.error("Ошибка при поиске города:", error);
 		}
 	};
 
-	const handleCitySelect = (city: City) => {
-		setSelectedCity(city);
-	};
+	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
+		setSearchTerm(e.target.value);
+	const handleCitySelect = (city: City) => setSelectedCity(city);
 
 	return (
 		<div className={styles.container}>
@@ -50,23 +73,26 @@ const MapComponent: React.FC = () => {
 				<div className={styles.searchContainer}>
 					<input
 						type="text"
-						placeholder="Введите название города"
+						placeholder="Найти город"
 						value={searchTerm}
-						onChange={(e) => setSearchTerm(e.target.value)}
+						onChange={handleSearch}
 						className={styles.searchInput}
 					/>
-					<button onClick={handleSearch} className={styles.searchButton}>
-						Найти город
+					<button onClick={fetchCoordinates} className={styles.searchButton}>
+						<img src={iconSearch} alt="iconSearch" />
 					</button>
 				</div>
 				<ul className={styles.cityList}>
 					{cities.map((city) => (
 						<li
 							key={city.name}
-							className={styles.cityItem}
+							className={`${styles.cityItem} ${
+								selectedCity.name === city.name ? styles.selectedCity : ""
+							}`}
 							onClick={() => handleCitySelect(city)}
 						>
-							{city.name} <span className={styles.count}>({city.count})</span>
+							<span className={styles.cityName}>{city.name}</span>
+							<span className={styles.count}>{city.count}</span>
 						</li>
 					))}
 				</ul>
@@ -74,10 +100,7 @@ const MapComponent: React.FC = () => {
 			<YMaps>
 				<div className={styles.mapContainer}>
 					<Map
-						state={{
-							center: selectedCity.coordinates,
-							zoom: 10,
-						}}
+						state={{ center: selectedCity.coordinates, zoom: 10 }}
 						style={{ width: "100%", height: "100%" }}
 					>
 						<Placemark
