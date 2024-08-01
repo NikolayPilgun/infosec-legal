@@ -1,0 +1,47 @@
+.accordionItem {
+	border-top: 2px solid #b3b3b3; /* Верхний бордер светло-серого цвета */
+}
+
+.accordionTitleWrapper {
+	min-height: 60px;
+	display: flex;
+	align-items: center; /* Вертикальное выравнивание заголовка */
+	cursor: pointer;
+}
+
+.accordionTitle {
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	flex: 1;
+}
+
+.accordionTitle span {
+	margin-right: 10px;
+}
+
+.accordionContentWrapper {
+	overflow: hidden;
+	transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.accordionContent {
+	padding: 0 10px;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.accordionContent.open {
+	padding: 10px;
+}
+
+.arrow {
+	font-size: 16px;
+	color: #b3b3b3; /* Цвет стрелок */
+}
+
+/* Дополнительный стиль для последнего элемента */
+.accordionItem:last-child {
+	border-bottom: 2px solid #b3b3b3; /* Нижний бордер светло-серого цвета */
+}
