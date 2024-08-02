@@ -1,25 +1,12 @@
 import React from "react";
+import CheckFormBlock from "../checkFormBlock/CheckFormBlock";
 import styles from "./CheckSection.module.css";
 
 const CheckSection: React.FC = () => {
 	return (
 		<section className={styles.container}>
 			<div className={styles.checkSection}>
-				<div className={styles.inputBlock}>
-					<h3>
-						Проверьте свою организацию онлайн <span>за 1 минуту</span> и
-						получите заключение эксперта по защите персональных данных -
-						<span> бесплатно</span>
-					</h3>
-					<div className={styles.checkForm}>
-						<input
-							type="text"
-							placeholder="ИНН Организации"
-							className={styles.input}
-						/>
-						<button className={styles.button}>Проверить</button>
-					</div>
-				</div>
+				<CheckFormBlock headingClassName={styles.customHeading} />
 
 				<div className={styles.certificationDetails}>
 					<div className={styles.detailItem}>

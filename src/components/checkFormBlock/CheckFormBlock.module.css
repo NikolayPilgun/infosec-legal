@@ -1,0 +1,41 @@
+.inputBlock {
+	padding: 0px;
+}
+
+.heading {
+	max-width: 630px;
+	margin-bottom: 40px;
+}
+
+.heading span {
+	border-bottom: 1px solid black;
+}
+
+.checkForm {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 20px;
+}
+
+.input {
+	padding: 15px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	flex: 1;
+	background-color: rgb(248, 250, 255);
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	font-size: 16px;
+	line-height: 16px;
+}
+
+.button {
+	width: 200px;
+	background-color: #011f60;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	font-size: 16px;
+	line-height: 16px;
+}

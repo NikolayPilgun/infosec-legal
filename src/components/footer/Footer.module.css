@@ -1,23 +1,24 @@
 .footer {
-	background-color: #f9fbff;
-	color: #0a1128;
-	padding: 20px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	width: 100%;
 }
 
 .topSection {
-	width: 100%;
-	max-width: 1200px;
+	padding: 40px 60px;
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
-	border-bottom: 1px solid #ddd;
-	padding-bottom: 20px;
-	margin-bottom: 20px;
+	align-items: flex-end;
+	gap: 40px;
 }
-
+.topSection > :nth-child(2) {
+	border-left: 2px solid #011e5c33;
+	border-right: 2px solid #011e5c33;
+}
+.footerNav {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	margin-bottom: 10px;
+}
 .logo img {
 	height: 50px;
 }
@@ -25,74 +26,88 @@
 .nav {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 25px;
+	flex: 0 0 20%;
 }
 
 .nav a {
-	color: #0a1128;
+	color: #011e5c;
 	text-decoration: none;
 	font-size: 16px;
+	font-weight: 400;
+	line-height: 16px;
 }
 
 .nav .active {
 	color: #ff6f61;
-	font-weight: bold;
+	font-weight: 500;
 }
 
 .nav a:hover {
 	text-decoration: underline;
 }
 
-.checkComponent {
-	text-align: center;
-}
-
-.checkComponent p {
-	margin: 0 0 10px;
-	font-size: 16px;
-}
-
-.checkComponent a {
-	color: #0a1128;
-	text-decoration: underline;
-}
-
-.checkComponent input {
-	padding: 10px;
-	font-size: 16px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	margin-bottom: 10px;
-}
-
-.checkComponent button {
-	padding: 10px 20px;
-	font-size: 16px;
-	background-color: #0a1128;
-	color: #fff;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-
-.checkComponent button:hover {
-	background-color: #080f26;
-}
-
 .contacts {
-	text-align: left;
+	flex: 0 0 20%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 40px;
+	text-align: right;
+	color: #011d5a;
+}
+.contactsPhone {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.contactsPhone > :nth-child(1) {
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 26px;
+}
+
+.contactsPhone > :nth-child(2) {
+	font-size: 14px;
+	line-height: 26px;
+}
+
+.contacts > :nth-child(2) {
 	font-size: 16px;
+	font-weight: 400;
+	line-height: 26px;
 }
 
 .bottomSection {
 	width: 100%;
-	text-align: center;
-	padding-top: 10px;
-	border-top: 1px solid #ddd;
+	min-height: 70px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 20px;
+	background-color: #0341c50d;
 }
 
 .bottomSection span {
-	display: block;
-	font-size: 14px;
-	color: #666;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 42px;
+	color: #011d5a;
+}
+
+.customHeading {
+	/* Кастомные стили для заголовка */
+	color: #001b55;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 22px;
+	text-align: left;
+}
+
+.customContainer {
+	/* Кастомные стили для контейнера */
+	padding: 0px 40px;
+	flex: 1;
 }
