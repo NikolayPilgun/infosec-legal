@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Activity1 from "../../assets/Activity/Activity1.svg";
 import Activity10 from "../../assets/Activity/Activity10.svg";
 import Activity11 from "../../assets/Activity/Activity11.svg";
@@ -59,11 +59,7 @@ const documents: Document[] = [
 		category: "Ещё документы",
 		url: Activity7,
 	},
-	{
-		title: "Информация о компании",
-		category: "Ещё документы",
-		url: Activity8,
-	},
+	{ title: "Информация о компании", category: "Ещё документы", url: Activity8 },
 	{
 		title: "Устав и нормативная база",
 		category: "Уставные документы",
@@ -86,16 +82,17 @@ const documents: Document[] = [
 	},
 ];
 
-const groupedDocuments: { [key: string]: Document[] } = documents.reduce(
-	(acc: { [key: string]: Document[] }, doc: Document) => {
-		if (!acc[doc.category]) {
-			acc[doc.category] = [];
-		}
+const groupDocumentsByCategory = (
+	docs: Document[]
+): { [key: string]: Document[] } =>
+	docs.reduce((acc: { [key: string]: Document[] }, doc: Document) => {
+		if (!acc[doc.category]) acc[doc.category] = [];
 		acc[doc.category].push(doc);
+
 		return acc;
-	},
-	{}
-);
+	}, {});
+
+const groupedDocuments = groupDocumentsByCategory(documents);
 
 const Activity: React.FC = () => {
 	const [selectedCategories, setSelectedCategories] = useState<Set<string>>(
@@ -105,30 +102,23 @@ const Activity: React.FC = () => {
 	const toggleCategory = (category: string) => {
 		setSelectedCategories((prev) => {
 			const newCategories = new Set(prev);
-			if (newCategories.has(category)) {
-				newCategories.delete(category);
-			} else {
-				newCategories.add(category);
-			}
+			newCategories.has(category)
+				? newCategories.delete(category)
+				: newCategories.add(category);
 			return newCategories;
 		});
 	};
 
-	const filteredDocuments = selectedCategories.size
-		? documents.filter((doc) => selectedCategories.has(doc.category))
-		: documents;
+	const filteredDocuments = useMemo(() => {
+		return selectedCategories.size
+			? documents.filter((doc) => selectedCategories.has(doc.category))
+			: documents;
+	}, [selectedCategories]);
 
-	const filteredGroupedDocuments: { [key: string]: Document[] } =
-		filteredDocuments.reduce(
-			(acc: { [key: string]: Document[] }, doc: Document) => {
-				if (!acc[doc.category]) {
-					acc[doc.category] = [];
-				}
-				acc[doc.category].push(doc);
-				return acc;
-			},
-			{}
-		);
+	const filteredGroupedDocuments = useMemo(
+		() => groupDocumentsByCategory(filteredDocuments),
+		[filteredDocuments]
+	);
 
 	return (
 		<div className={styles.activityContainer}>
@@ -143,9 +133,7 @@ const Activity: React.FC = () => {
 										<img src={doc.url} alt={doc.title} />
 									</div>
 									<div className={styles.documentTitle}>
-										<a href={doc.url} download>
-											{doc.title}
-										</a>
+										<p>{doc.title}</p>
 									</div>
 								</div>
 							))}

@@ -1,23 +1,23 @@
 .activityContainer {
 	display: flex;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 20px;
+	gap: 40px;
+	padding: 20px 40px;
 }
 
 .mainContent {
 	flex: 1 1 70%;
-	margin-right: 20px;
 }
 
 .documentsSection {
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 }
 
 .documentsSection h2 {
-	margin-bottom: 20px;
 	font-size: 24px;
-	color: #0a1128;
+	font-weight: 500;
+	line-height: 30px;
+	margin-bottom: 20px;
+	color: #001b55;
 }
 
 .documentsGrid {
@@ -27,50 +27,44 @@
 }
 
 .documentCard {
-	background: white;
-	padding: 20px;
-	border-radius: 8px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	flex: 1 1 calc(33.333% - 20px);
-	max-width: calc(33.333% - 20px);
-	text-align: center;
+	max-width: 200px;
+	height: 350px;
 }
 
 .documentIcon img {
-	height: 50px;
+	width: 100%;
 }
 
 .documentTitle {
-	margin-top: 10px;
-	font-size: 16px;
-	color: #0a1128;
-}
-
-.documentTitle a {
-	color: inherit;
-	text-decoration: none;
-}
-
-.documentTitle a:hover {
-	text-decoration: underline;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 12px;
+	text-align: left;
+	color: #000000;
 }
 
 .sidebar {
-	flex: 0 0 300px;
+	width: 400px;
+	margin-top: -70px;
 }
 
 .sidebarSticky {
 	position: sticky;
 	top: 20px;
 	background: #f9f9f9;
-	padding: 20px;
+	padding: 50px;
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .sidebarSticky h2 {
-	font-size: 20px;
-	margin-bottom: 20px;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 20px;
+	margin-bottom: 30px;
+	color: #000000;
+	padding-bottom: 10px;
+	border-bottom: 2px solid #737373;
 }
 
 .sidebarSticky ul {
@@ -79,8 +73,10 @@
 }
 
 .sidebarSticky li {
-	margin-bottom: 10px;
 	font-size: 16px;
+	font-weight: 400;
+	line-height: 20px;
+	margin-bottom: 20px;
 	cursor: pointer;
 }
 
