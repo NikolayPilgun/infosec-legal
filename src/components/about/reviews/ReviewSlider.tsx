@@ -59,7 +59,7 @@ const reviews = [
 
 const ReviewSlider: React.FC = () => {
 	return (
-		<div className={styles.sliderContainer}>
+		<section className={styles.sliderContainer}>
 			<Swiper
 				modules={[Navigation]}
 				spaceBetween={20}
@@ -81,7 +81,7 @@ const ReviewSlider: React.FC = () => {
 					</SwiperSlide>
 				))}
 			</Swiper>
-		</div>
+		</section>
 	);
 };
 

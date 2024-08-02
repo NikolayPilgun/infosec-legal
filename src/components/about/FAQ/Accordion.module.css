@@ -1,11 +1,11 @@
 .accordionItem {
-	border-top: 2px solid #b3b3b3; /* Верхний бордер светло-серого цвета */
+	border-top: 2px solid #b3b3b3;
 }
 
 .accordionTitleWrapper {
 	min-height: 60px;
 	display: flex;
-	align-items: center; /* Вертикальное выравнивание заголовка */
+	align-items: center;
 	cursor: pointer;
 }
 
@@ -14,15 +14,13 @@
 	display: flex;
 	align-items: center;
 	flex: 1;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 20px;
 }
 
 .accordionTitle span {
 	margin-right: 10px;
-}
-
-.accordionContentWrapper {
-	overflow: hidden;
-	transition: max-height 0.3s ease-out, padding 0.3s ease-out;
 }
 
 .accordionContent {
@@ -32,16 +30,31 @@
 	transition: max-height 0.3s ease-out, padding 0.3s ease-out;
 }
 
+.accordionContent p {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 22px;
+	text-align: left;
+}
+
 .accordionContent.open {
 	padding: 10px;
 }
 
 .arrow {
 	font-size: 16px;
-	color: #b3b3b3; /* Цвет стрелок */
+	color: #b3b3b3;
 }
 
-/* Дополнительный стиль для последнего элемента */
 .accordionItem:last-child {
-	border-bottom: 2px solid #b3b3b3; /* Нижний бордер светло-серого цвета */
+	border-bottom: 2px solid #b3b3b3;
+}
+
+.documents {
+	display: flex;
+	justify-content: flex-start;
+	align-items: self-start;
+	gap: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }

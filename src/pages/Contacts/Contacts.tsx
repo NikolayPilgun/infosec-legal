@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import styles from "./Contacts.module.css";
 
-const documents = [
+interface Document {
+	title: string;
+	fileType: string;
+	url: string;
+}
+
+const documents: Document[] = [
 	{ title: "Устав организации", fileType: "PDF", url: "/docs/charter.pdf" },
 	{
 		title: "Карточка предприятия в несколько строк",
@@ -13,15 +20,19 @@ const documents = [
 		fileType: "JPG",
 		url: "/docs/license.jpg",
 	},
-	{
-		title: "Карточка предприятия в несколько строк",
-		fileType: "DOCX",
-		url: "/docs/card.docx",
-	},
 	// Добавьте остальные документы
 ];
 
 const Contacts: React.FC = () => {
+	const location = useLocation();
+	const questionSectionRef = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		if (location.state?.scrollToQuestion && questionSectionRef.current) {
+			questionSectionRef.current.scrollIntoView({ behavior: "smooth" });
+		}
+	}, [location]);
+
 	return (
 		<div className={styles.contactsContainer}>
 			<header className={styles.header}>
@@ -90,7 +101,7 @@ const Contacts: React.FC = () => {
 				</div>
 			</section>
 
-			<section className={styles.questionSection}>
+			<section className={styles.questionSection} ref={questionSectionRef}>
 				<h2>У вас есть вопрос?</h2>
 				<form className={styles.questionForm}>
 					<input type="text" placeholder="Ваше Имя" required />

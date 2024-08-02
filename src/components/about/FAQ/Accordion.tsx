@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styles from "./Accordion.module.css";
 
 interface AccordionProps {
@@ -7,24 +7,20 @@ interface AccordionProps {
 	documentImages?: string[];
 }
 
-const Accordion: React.FC<AccordionProps> = ({
-	title,
-	content,
-	documentImages,
-}) => {
+const Accordion: FC<AccordionProps> = ({ title, content, documentImages }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const contentRef = useRef<HTMLDivElement>(null);
-	const [maxHeight, setMaxHeight] = useState<string>("0px");
-
-	const toggleAccordion = () => {
-		setIsOpen(!isOpen);
-	};
 
 	useEffect(() => {
 		if (contentRef.current) {
-			setMaxHeight(isOpen ? `${contentRef.current.scrollHeight}px` : "0px");
+			contentRef.current.style.maxHeight = isOpen
+				? `${contentRef.current.scrollHeight}px`
+				: "0px";
+			contentRef.current.style.padding = isOpen ? "10px" : "0 10px";
 		}
 	}, [isOpen]);
+
+	const toggleAccordion = () => setIsOpen(!isOpen);
 
 	return (
 		<div className={styles.accordionItem}>
@@ -36,7 +32,6 @@ const Accordion: React.FC<AccordionProps> = ({
 			</div>
 			<div
 				className={`${styles.accordionContent} ${isOpen ? styles.open : ""}`}
-				style={{ maxHeight }}
 				ref={contentRef}
 			>
 				{isOpen && (
