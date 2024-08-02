@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Activity1 from "../../assets/Activity/Activity1.svg";
 import Activity10 from "../../assets/Activity/Activity10.svg";
 import Activity11 from "../../assets/Activity/Activity11.svg";
@@ -10,6 +10,8 @@ import Activity6 from "../../assets/Activity/Activity6.svg";
 import Activity7 from "../../assets/Activity/Activity7.svg";
 import Activity8 from "../../assets/Activity/Activity8.svg";
 import Activity9 from "../../assets/Activity/Activity9.svg";
+import Loader from "../../components/Loader/Loader";
+import PopupActivity from "../../components/activity/PopupActivity";
 import styles from "./Activity.module.css";
 
 interface Document {
@@ -88,7 +90,6 @@ const groupDocumentsByCategory = (
 	docs.reduce((acc: { [key: string]: Document[] }, doc: Document) => {
 		if (!acc[doc.category]) acc[doc.category] = [];
 		acc[doc.category].push(doc);
-
 		return acc;
 	}, {});
 
@@ -98,6 +99,14 @@ const Activity: React.FC = () => {
 	const [selectedCategories, setSelectedCategories] = useState<Set<string>>(
 		new Set()
 	);
+	const [selectedDocument, setSelectedDocument] = useState<Document | null>(
+		null
+	);
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		setTimeout(() => setIsLoading(false), 1000);
+	}, []);
 
 	const toggleCategory = (category: string) => {
 		setSelectedCategories((prev) => {
@@ -120,6 +129,18 @@ const Activity: React.FC = () => {
 		[filteredDocuments]
 	);
 
+	const handleImageClick = (doc: Document) => {
+		setSelectedDocument(doc);
+	};
+
+	const closePopup = () => {
+		setSelectedDocument(null);
+	};
+
+	if (isLoading) {
+		return <Loader />;
+	}
+
 	return (
 		<div className={styles.activityContainer}>
 			<main className={styles.mainContent}>
@@ -129,12 +150,15 @@ const Activity: React.FC = () => {
 						<div className={styles.documentsGrid}>
 							{filteredGroupedDocuments[category].map((doc, idx) => (
 								<div key={idx} className={styles.documentCard}>
-									<div className={styles.documentIcon}>
-										<img src={doc.url} alt={doc.title} />
-									</div>
-									<div className={styles.documentTitle}>
-										<p>{doc.title}</p>
-									</div>
+									<figure
+										className={styles.documentIcon}
+										onClick={() => handleImageClick(doc)}
+									>
+										<img src={doc.url} alt={doc.title} loading="lazy" />
+										<figcaption className={styles.documentTitle}>
+											<p>{doc.title}</p>
+										</figcaption>
+									</figure>
 								</div>
 							))}
 						</div>
@@ -159,6 +183,13 @@ const Activity: React.FC = () => {
 					</ul>
 				</div>
 			</aside>
+			{selectedDocument && (
+				<PopupActivity
+					imageUrl={selectedDocument.url}
+					title={selectedDocument.title}
+					onClose={closePopup}
+				/>
+			)}
 		</div>
 	);
 };

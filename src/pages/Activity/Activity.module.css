@@ -29,6 +29,13 @@
 .documentCard {
 	max-width: 200px;
 	height: 350px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.documentIcon {
+	cursor: pointer;
 }
 
 .documentIcon img {
