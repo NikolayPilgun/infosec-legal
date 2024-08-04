@@ -4,6 +4,7 @@ import Registry1 from "../../assets/Registry/Registry1.svg";
 import Registry2 from "../../assets/Registry/Registry2.svg";
 import Registry3 from "../../assets/Registry/Registry3.svg";
 
+import organizations from "../../data/organizations";
 import styles from "./Registry.module.css";
 
 interface Organization {
@@ -21,40 +22,9 @@ const statuses: { [key in Organization["status"]]: string } = {
 	Отсутствует: Registry1,
 };
 
-const organizations: Organization[] = [
-	{
-		id: "22680",
-		date: "12 Февраля 2023",
-		name: "ООО 'РАЙТ ПЕРСЕПШН'",
-		inn: "2632115070",
-		ogrn: "90872632115070",
-		status: "Действителен",
-	},
-	{
-		id: "22681",
-		date: "12 Февраля 2023",
-		name: "ООО 'ЯНДЕКС.МЕДИАСЕРВИСЫ'",
-		inn: "2632115070",
-		ogrn: "90872632115070",
-		status: "Приостановлен",
-	},
-	{
-		id: "22682",
-		date: "12 Февраля 2023",
-		name: "ООО 'РАЙТ ПЕРСЕПШН'",
-		inn: "2632115070",
-		ogrn: "90872632115070",
-		status: "Действителен",
-	},
-	{
-		id: "22683",
-		date: "12 Февраля 2023",
-		name: "ООО 'ЯНДЕКС.МЕДИАСЕРВИСЫ'",
-		inn: "2632115070",
-		ogrn: "90872632115070",
-		status: "Отсутствует",
-	},
-];
+const PAGE_SIZE = 4;
+const TOTAL_RECORDS = organizations.length;
+const TOTAL_PAGES = Math.ceil(TOTAL_RECORDS / PAGE_SIZE);
 
 const filters = [
 	{ id: "all", label: "Все записи", count: 34678 },
@@ -64,10 +34,28 @@ const filters = [
 
 const Registry: React.FC = () => {
 	const [activeFilter, setActiveFilter] = useState<string | null>("all");
+	const [currentPage, setCurrentPage] = useState<number>(1);
 
 	const handleFilterClick = (filter: string) => {
 		setActiveFilter(filter);
 	};
+
+	const handlePrevPage = () => {
+		if (currentPage > 1) {
+			setCurrentPage(currentPage - 1);
+		}
+	};
+
+	const handleNextPage = () => {
+		if (currentPage < TOTAL_PAGES) {
+			setCurrentPage(currentPage + 1);
+		}
+	};
+
+	const paginatedOrganizations = organizations.slice(
+		(currentPage - 1) * PAGE_SIZE,
+		currentPage * PAGE_SIZE
+	);
 
 	return (
 		<div className={styles.registryContainer}>
@@ -105,8 +93,8 @@ const Registry: React.FC = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{organizations.map((org, index) => (
-							<tr key={index}>
+						{paginatedOrganizations.map((org) => (
+							<tr key={org.id}>
 								<td>{org.id}</td>
 								<td>{org.date}</td>
 								<td>{org.name}</td>
@@ -124,11 +112,13 @@ const Registry: React.FC = () => {
 					</tbody>
 				</table>
 				<div className={styles.pagination}>
-					<button className={styles.prevButton}>
+					<button className={styles.prevButton} onClick={handlePrevPage}>
 						<img src={Arrow} alt="Назад" />
 					</button>
-					<span>1 из 934 страниц</span>
-					<button>
+					<span>
+						{currentPage} из {TOTAL_PAGES} страниц
+					</span>
+					<button onClick={handleNextPage}>
 						<img src={Arrow} alt="Вперед" />
 					</button>
 				</div>

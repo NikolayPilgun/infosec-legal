@@ -173,6 +173,7 @@
 	transition: transform 0.1s ease, box-shadow 0.1s ease,
 		background-color 0.3s ease;
 }
+
 .pagination .prevButton img {
 	transform: rotate(180deg);
 }
