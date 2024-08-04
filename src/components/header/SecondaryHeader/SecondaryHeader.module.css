@@ -4,6 +4,8 @@
 	color: #fff;
 	display: flex;
 	align-items: end;
+	position: relative;
+	overflow: hidden;
 }
 .container {
 	padding-bottom: 40px;
@@ -15,4 +17,9 @@
 	font-weight: 400;
 	margin-bottom: 15px;
 	padding-bottom: 20px;
+}
+.IMGContainer {
+	position: absolute;
+	top: 0px;
+	right: 20px;
 }

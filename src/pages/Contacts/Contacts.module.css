@@ -1,129 +1,148 @@
 .contactsContainer {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 20px;
-}
-
-.header {
-	background-color: #0a1128;
-	color: white;
-	padding: 20px;
-	border-radius: 8px;
-}
-
-.header h1 {
+	padding: 0;
 	margin: 0;
-}
-
-.header p {
-	margin: 5px 0;
-	font-size: 14px;
-	color: rgba(255, 255, 255, 0.7);
 }
 
 .contactsSection {
 	display: flex;
 	flex-wrap: wrap;
-	margin: 40px 0;
+	margin-bottom: 10px;
 }
 
 .mapContainer {
 	position: relative;
 	width: 100%;
-	margin-bottom: 40px;
+	height: 450px;
 }
 
 .contactInfo {
+	max-width: 550px;
 	position: absolute;
-	top: 20px;
-	right: 20px;
+	top: -50px;
+	right: 40px;
 	background: white;
-	padding: 20px;
-	border-radius: 8px;
+	padding: 30px;
+	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	z-index: 500;
 }
 
 .contactInfo p {
-	margin: 0 0 20px;
-}
-
-.contactInfo ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-.contactInfo li {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 20px;
+	text-align: left;
+	padding-bottom: 20px;
 	margin-bottom: 10px;
+	border-bottom: 1px solid #ddd;
+}
+
+.contactDetails {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	list-style: none;
+	margin-bottom: 30px;
+}
+
+.contactDetails li {
+	display: flex;
+	flex-direction: column;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 26px;
+	text-align: left;
+	padding: 20px;
+	border-bottom: 1px solid #ddd;
+}
+.contactDetails li strong {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 16px;
+	text-align: left;
+	color: rgb(126, 126, 126);
+}
+.contactDetails li:nth-child(2n) {
+	border-right: 1px solid #ddd;
+}
+
+.contactDetails li:nth-child(1) {
+	grid-column: span 2;
+}
+
+.contactDetails li:last-child,
+.contactDetails li:nth-last-child(2) {
+	border-bottom: none;
 }
 
 .contactInfo button {
 	display: block;
-	width: 100%;
-	padding: 10px 20px;
-	background-color: #0a1128;
+	width: 350px;
+	height: 50px;
+	margin: 0 auto;
+	background-color: #011f60;
 	color: white;
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
+	font-size: 16px;
+	line-height: 16px;
+}
+
+.containerSection {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 40px;
+	gap: 40px;
 }
 
 .documentsSection {
-	margin: 40px 0;
+	flex: 1 1 60%;
 }
 
 .documentsSection h2 {
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 30px;
 	margin-bottom: 20px;
 	font-size: 24px;
-	color: #0a1128;
+	color: #001b55;
 }
 
 .documentsGrid {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 20px;
+	gap: 40px;
 }
 
 .documentCard {
-	background: white;
-	padding: 20px;
-	border-radius: 8px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	flex: 1 1 calc(25% - 40px);
+	width: 250px;
 	text-align: center;
+	cursor: pointer;
 }
-
-.documentIcon img {
-	height: 50px;
-}
-
-.documentTitle {
-	margin-top: 10px;
-	font-size: 16px;
-	color: #0a1128;
-}
-
-.documentTitle a {
-	color: inherit;
-	text-decoration: none;
-}
-
-.documentTitle a:hover {
-	text-decoration: underline;
+.documentCard img {
+	width: 100%;
 }
 
 .questionSection {
-	margin: 40px 0;
-	padding: 20px;
-	background: #f9f9f9;
-	border-radius: 8px;
+	flex: 1 1 40%;
 }
 
 .questionSection h2 {
-	margin-bottom: 20px;
 	font-size: 24px;
-	color: #0a1128;
-	text-align: center;
+	font-weight: 500;
+	line-height: 30px;
+	text-align: left;
+	margin-bottom: 20px;
+	color: #001b55;
+}
+.questionSection h3 {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 20px;
+	text-align: left;
+	margin-bottom: 20px;
+	color: #000000;
 }
 
 .questionForm {
@@ -134,18 +153,34 @@
 
 .questionForm input,
 .questionForm textarea {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 20px;
 	padding: 10px;
 	border-radius: 4px;
 	border: 1px solid #ddd;
 }
 
+.questionForm input {
+	height: 50px;
+}
+
+.questionForm textarea {
+	height: 200px;
+}
 .questionForm button {
-	padding: 10px 20px;
-	background-color: #0a1128;
+	width: 200px;
+	height: 50px;
+	background-color: #011f60;
 	color: white;
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
 	display: block;
-	margin: 0 auto;
+}
+
+.error {
+	color: red;
+	font-size: 14px;
+	margin-top: -10px;
 }

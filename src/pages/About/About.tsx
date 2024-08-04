@@ -2,7 +2,7 @@ import React from "react";
 import Awards from "../../components/about/Awards";
 import CheckSection from "../../components/about/CheckSection";
 import FAQ from "../../components/about/FAQ/FAQ";
-import MapComponent from "../../components/about/MapComponent";
+import MapComponent from "../../components/about/MainComponent";
 import Recognition from "../../components/about/Recognition";
 import ReviewSlider from "../../components/about/reviews/ReviewSlider";
 import styles from "./About.module.css";

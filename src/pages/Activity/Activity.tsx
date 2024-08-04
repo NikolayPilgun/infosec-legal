@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import Activity1 from "../../assets/Activity/Activity1.svg";
 import Activity10 from "../../assets/Activity/Activity10.svg";
 import Activity11 from "../../assets/Activity/Activity11.svg";
@@ -10,7 +10,6 @@ import Activity6 from "../../assets/Activity/Activity6.svg";
 import Activity7 from "../../assets/Activity/Activity7.svg";
 import Activity8 from "../../assets/Activity/Activity8.svg";
 import Activity9 from "../../assets/Activity/Activity9.svg";
-import Loader from "../../components/Loader/Loader";
 import PopupActivity from "../../components/activity/PopupActivity";
 import styles from "./Activity.module.css";
 
@@ -102,11 +101,6 @@ const Activity: React.FC = () => {
 	const [selectedDocument, setSelectedDocument] = useState<Document | null>(
 		null
 	);
-	const [isLoading, setIsLoading] = useState(true);
-
-	useEffect(() => {
-		setTimeout(() => setIsLoading(false), 1000);
-	}, []);
 
 	const toggleCategory = (category: string) => {
 		setSelectedCategories((prev) => {
@@ -136,10 +130,6 @@ const Activity: React.FC = () => {
 	const closePopup = () => {
 		setSelectedDocument(null);
 	};
-
-	if (isLoading) {
-		return <Loader />;
-	}
 
 	return (
 		<div className={styles.activityContainer}>

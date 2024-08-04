@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Map, Placemark, YMaps } from "react-yandex-maps";
 import iconSearch from "../../assets/map/icon.svg";
-import styles from "./MapComponent.module.css";
+import MapComponent from "../Map/MapComponent";
+import styles from "./MainComponent.module.css";
 
 interface City {
 	name: string;
@@ -24,10 +24,12 @@ const cities: City[] = [
 ];
 
 const defaultCity: City = cities[1];
+const defaultZoom = 12;
 
-const MapComponent: React.FC = () => {
+const MainComponent: React.FC = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedCity, setSelectedCity] = useState<City>(defaultCity);
+	const [zoom, setZoom] = useState<number>(defaultZoom);
 
 	useEffect(() => {
 		if (!searchTerm) setSelectedCity(defaultCity);
@@ -51,6 +53,7 @@ const MapComponent: React.FC = () => {
 						name: display_name,
 						coordinates: [latitude, longitude],
 					});
+					setZoom(defaultZoom); // сбросить уровень масштабирования при поиске
 				} else {
 					alert(`Некорректные координаты для города "${searchTerm}".`);
 				}
@@ -64,7 +67,11 @@ const MapComponent: React.FC = () => {
 
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
 		setSearchTerm(e.target.value);
-	const handleCitySelect = (city: City) => setSelectedCity(city);
+
+	const handleCitySelect = (city: City) => {
+		setSelectedCity(city);
+		setZoom(defaultZoom);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -97,22 +104,9 @@ const MapComponent: React.FC = () => {
 					))}
 				</ul>
 			</div>
-			<YMaps>
-				<div className={styles.mapContainer}>
-					<Map
-						state={{ center: selectedCity.coordinates, zoom: 10 }}
-						style={{ width: "100%", height: "100%" }}
-					>
-						<Placemark
-							geometry={selectedCity.coordinates}
-							properties={{ balloonContent: selectedCity.name }}
-							options={{ preset: "islands#icon", iconColor: "#0095b6" }}
-						/>
-					</Map>
-				</div>
-			</YMaps>
+			<MapComponent selectedCity={selectedCity} zoom={zoom} />
 		</div>
 	);
 };
 
-export default MapComponent;
+export default MainComponent;

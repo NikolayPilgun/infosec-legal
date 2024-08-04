@@ -13,7 +13,7 @@ const MainHeader: React.FC = () => {
 				</h2>
 			</div>
 			<div className={styles.IMGContainer}>
-				<img src={NavIMG} alt="NavIMG" className={styles.navImg} />
+				<img src={NavIMG} alt="NavIMG" />
 			</div>
 		</div>
 	);

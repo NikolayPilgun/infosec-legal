@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import styles from "./PopupActivity.module.css";
 
@@ -33,12 +32,6 @@ const PopupActivity: React.FC<PopupActivityProps> = ({
 			</div>
 		</div>
 	);
-};
-
-PopupActivity.propTypes = {
-	imageUrl: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired,
-	onClose: PropTypes.func.isRequired,
 };
 
 export default PopupActivity;
