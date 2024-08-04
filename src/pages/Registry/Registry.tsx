@@ -1,4 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import Arrow from "../../assets/Registry/ARleft.svg";
+import Registry1 from "../../assets/Registry/Registry1.svg";
+import Registry2 from "../../assets/Registry/Registry2.svg";
+import Registry3 from "../../assets/Registry/Registry3.svg";
+
 import styles from "./Registry.module.css";
 
 interface Organization {
@@ -9,6 +14,12 @@ interface Organization {
 	ogrn: string;
 	status: "Действителен" | "Приостановлен" | "Отсутствует";
 }
+
+const statuses: { [key in Organization["status"]]: string } = {
+	Действителен: Registry3,
+	Приостановлен: Registry2,
+	Отсутствует: Registry1,
+};
 
 const organizations: Organization[] = [
 	{
@@ -43,23 +54,23 @@ const organizations: Organization[] = [
 		ogrn: "90872632115070",
 		status: "Отсутствует",
 	},
-	// Добавьте остальные организации
 ];
 
-const statuses: Record<Organization["status"], string> = {
-	Действителен: "green",
-	Приостановлен: "orange",
-	Отсутствует: "red",
-};
+const filters = [
+	{ id: "all", label: "Все записи", count: 34678 },
+	{ id: "valid", label: "Действительные", count: 18600 },
+	{ id: "excluded", label: "Исключенные", count: 9345 },
+];
 
 const Registry: React.FC = () => {
+	const [activeFilter, setActiveFilter] = useState<string | null>("all");
+
+	const handleFilterClick = (filter: string) => {
+		setActiveFilter(filter);
+	};
+
 	return (
 		<div className={styles.registryContainer}>
-			<header className={styles.header}>
-				<h1>Единый реестр организаций</h1>
-				<p>Главная / Единый реестр</p>
-			</header>
-
 			<section className={styles.searchSection}>
 				<h3>
 					Вы можете проверить свою организацию на наличие и действительность
@@ -72,6 +83,17 @@ const Registry: React.FC = () => {
 			</section>
 
 			<section className={styles.registrySection}>
+				<div className={styles.registryFilter}>
+					{filters.map((filter) => (
+						<h4
+							key={filter.id}
+							className={activeFilter === filter.id ? styles.active : ""}
+							onClick={() => handleFilterClick(filter.id)}
+						>
+							{filter.label} <span>{filter.count}</span>
+						</h4>
+					))}
+				</div>
 				<table className={styles.registryTable}>
 					<thead>
 						<tr>
@@ -92,12 +114,9 @@ const Registry: React.FC = () => {
 									{org.inn} / {org.ogrn}
 								</td>
 								<td>
-									<span
-										className={`${styles.status} ${
-											styles[statuses[org.status]]
-										}`}
-									>
-										{org.status}
+									<span className={styles.tableStatus}>
+										<img src={statuses[org.status]} alt={org.status} />
+										<span>{org.status}</span>
 									</span>
 								</td>
 							</tr>
@@ -105,9 +124,13 @@ const Registry: React.FC = () => {
 					</tbody>
 				</table>
 				<div className={styles.pagination}>
-					<button>Назад</button>
+					<button className={styles.prevButton}>
+						<img src={Arrow} alt="Назад" />
+					</button>
 					<span>1 из 934 страниц</span>
-					<button>Вперед</button>
+					<button>
+						<img src={Arrow} alt="Вперед" />
+					</button>
 				</div>
 			</section>
 		</div>

@@ -125,14 +125,14 @@ const Contacts: React.FC = () => {
 
 	const defaultCity = {
 		name: "Санкт-Петербург",
-		coordinates: [59.9342802, 30.3350986] as [number, number],
+		coordinates: [60.18895233804513, 29.80477450588791] as [number, number],
 	};
 
 	return (
 		<div className={styles.contactsContainer}>
 			<section className={styles.contactsSection}>
 				<div className={styles.mapContainer}>
-					<MapComponent selectedCity={defaultCity} zoom={19} />
+					<MapComponent selectedCity={defaultCity} zoom={16} />
 					<div className={styles.contactInfo}>
 						<p>
 							Для получения информации вы можете позвонить в справочную службу
