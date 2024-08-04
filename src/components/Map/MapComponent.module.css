@@ -1,12 +1,5 @@
-.mapContainer {
+.container {
 	flex-grow: 1;
 	position: relative;
 	height: 100%;
-}
-
-.mapPlaceholder {
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }

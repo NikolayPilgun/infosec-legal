@@ -26,7 +26,7 @@ const customIcon = new L.Icon({
 
 const MapComponent: React.FC<MapProps> = ({ selectedCity, zoom }) => {
 	return (
-		<div className={styles.mapContainer}>
+		<div className={styles.container}>
 			<MapContainer
 				center={selectedCity.coordinates}
 				zoom={zoom}
