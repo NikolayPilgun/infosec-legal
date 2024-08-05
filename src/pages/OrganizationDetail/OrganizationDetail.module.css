@@ -74,9 +74,9 @@
 }
 
 .certificate {
-	max-width: 500px;
-	position: relative;
-	top: -180px;
+	max-width: 440px;
+	margin-top: -180px;
+	z-index: 10;
 	background: white;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	padding: 40px;
@@ -153,4 +153,12 @@
 }
 .infoItem:last-child {
 	border-bottom: none;
+}
+.gridItem:nth-child(-n + 4) {
+	border-bottom: none;
+}
+.gridItem:nth-child(2),
+.gridItem:nth-child(4),
+.gridItem:nth-child(6) {
+	padding-left: 40px;
 }
