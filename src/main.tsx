@@ -1,4 +1,4 @@
-// import React from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.tsx";
@@ -6,6 +6,7 @@ import "./index.css";
 import About from "./pages/About/About.tsx";
 import Activity from "./pages/Activity/Activity.tsx";
 import Contacts from "./pages/Contacts/Contacts.tsx";
+import OrganizationDetail from "./pages/OrganizationDetail/OrganizationDetail.tsx";
 import Registry from "./pages/Registry/Registry.tsx";
 
 const router = createBrowserRouter([
@@ -26,12 +27,18 @@ const router = createBrowserRouter([
 				path: "contacts",
 				element: <Contacts />,
 			},
+			{
+				path: "registry/:id",
+				element: <OrganizationDetail />,
+			},
 		],
 	},
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-	<RouterProvider router={router} />
+	<React.StrictMode>
+		<RouterProvider router={router} />
+	</React.StrictMode>
 );
 
 // <React.StrictMode>

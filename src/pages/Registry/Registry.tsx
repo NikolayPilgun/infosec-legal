@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Arrow from "../../assets/Registry/ARleft.svg";
 import Registry1 from "../../assets/Registry/Registry1.svg";
 import Registry2 from "../../assets/Registry/Registry2.svg";
@@ -133,6 +134,12 @@ const Registry: React.FC = () => {
 		currentPage * PAGE_SIZE
 	);
 
+	const navigate = useNavigate();
+
+	const handleRowClick = (id: string) => {
+		navigate(`/registry/${id}`);
+	};
+
 	return (
 		<div className={styles.registryContainer}>
 			<section className={styles.searchSection}>
@@ -175,7 +182,7 @@ const Registry: React.FC = () => {
 					</thead>
 					<tbody>
 						{paginatedOrganizations.map((org) => (
-							<tr key={org.id}>
+							<tr key={org.id} onClick={() => handleRowClick(org.id)}>
 								<td>{org.id}</td>
 								<td>{org.date}</td>
 								<td>{org.name}</td>

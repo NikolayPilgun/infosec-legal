@@ -1,0 +1,156 @@
+.container {
+	padding: 40px;
+}
+.backLink {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin-bottom: 60px;
+}
+
+.backLink button {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 16px;
+	text-align: left;
+	color: #001b55;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.containerInfo {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 40px;
+	padding: 0px 20px;
+}
+
+.organizationInfo {
+	padding: 10px;
+}
+.organName {
+	margin-bottom: 30px;
+}
+
+.organName p {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 26px;
+	color: #555;
+}
+.organName h3 {
+	text-transform: uppercase;
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 26px;
+	color: #001b55;
+}
+.organName h4 {
+	font-size: 18px;
+	line-height: 26px;
+	color: #001b55;
+}
+.containsRegistry {
+	margin-bottom: 30px;
+}
+.containsRegistry span {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.containsRegistry span {
+	font-size: 16px;
+	line-height: 12px;
+	color: #001b55;
+	text-decoration: underline;
+}
+.organNumber {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+}
+
+.certificate {
+	max-width: 500px;
+	position: relative;
+	top: -180px;
+	background: white;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	padding: 40px;
+	border-radius: 5px;
+}
+
+.certificateTitle {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 20px;
+}
+
+.certificateTitle p {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.certificateTitle p span {
+	font-size: 16px;
+	line-height: 20px;
+	color: #000000;
+}
+.certificateTitle p a {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 12px;
+	color: #5e5e5e;
+	text-decoration: none;
+}
+.certificateTitle p a img {
+	margin-right: 10px;
+}
+.gridContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto auto auto;
+	margin-bottom: 30px;
+}
+
+.gridItem {
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding: 20px 10px;
+}
+
+.rightBorder {
+	border-right: 1px solid #ccc;
+}
+.gridItem p,
+.infoItem p {
+	font-size: 16px;
+	line-height: 16px;
+	color: #5e5e5e;
+	margin-bottom: 10px;
+}
+.gridItem h5,
+.infoItem h5 {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 20px;
+	margin-bottom: 5px;
+}
+
+.gridItem h5 span {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.infoItem {
+	padding: 20px 10px;
+	border-bottom: 1px solid #ccc;
+}
+.infoItem:last-child {
+	border-bottom: none;
+}
