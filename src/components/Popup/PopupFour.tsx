@@ -7,7 +7,42 @@ import PopupG from "../../assets/Popup/popupG.svg";
 import popupYes from "../../assets/Popup/popupYes.svg";
 import styles from "./PopupFour.module.css";
 
-const PopupFour: React.FC = () => {
+interface SecurityAssessment {
+	yes: boolean;
+	no: boolean;
+	unknown: boolean;
+}
+
+interface FormData {
+	securityAssessment: SecurityAssessment;
+	[key: string]: unknown;
+}
+
+interface PopupFourProps {
+	formData: FormData;
+	setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+	handleNext: () => void;
+	handleBack: () => void;
+}
+
+const PopupFour: React.FC<PopupFourProps> = ({
+	formData,
+	setFormData,
+	handleNext,
+	handleBack,
+}) => {
+	const handleInputChange =
+		(field: keyof SecurityAssessment) =>
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			setFormData((prevState) => ({
+				...prevState,
+				securityAssessment: {
+					...prevState.securityAssessment,
+					[field]: e.target.checked,
+				},
+			}));
+		};
+
 	const steps = [
 		{
 			img1: popupYes,
@@ -33,7 +68,7 @@ const PopupFour: React.FC = () => {
 			<section className={styles.headerSection}>
 				<div className={styles.diamond}></div>
 				<div className={styles.popupMessage}>
-					<span>86%</span>
+					<span>75%</span>
 				</div>
 				<h2>
 					Бесплатная проверка организации на соответствие требованиям
@@ -52,32 +87,41 @@ const PopupFour: React.FC = () => {
 				</div>
 			</section>
 			<section className={styles.bodySection}>
+				<h3>Проводилась ли оценка уровня защищенности?</h3>
 				<form>
 					<div className={styles.inputs}>
-						<h3>
-							Проводилась ли в вашей организации оценка уровня защищенности?
-						</h3>
-						<div className={styles.checkboxes}>
-							<label>
-								<input type="checkbox" />
-								Да
-							</label>
-							<label>
-								<input type="checkbox" />
-								Нет
-							</label>
-							<label>
-								<input type="checkbox" />
-								Не знаю
-							</label>
-						</div>
+						<label>
+							<input
+								type="checkbox"
+								checked={formData.securityAssessment.yes}
+								onChange={handleInputChange("yes")}
+							/>{" "}
+							Да
+						</label>
+						<label>
+							<input
+								type="checkbox"
+								checked={formData.securityAssessment.no}
+								onChange={handleInputChange("no")}
+							/>{" "}
+							Нет
+						</label>
+						<label>
+							<input
+								type="checkbox"
+								checked={formData.securityAssessment.unknown}
+								onChange={handleInputChange("unknown")}
+							/>{" "}
+							Не знаю
+						</label>
 					</div>
-
 					<div className={styles.formButton}>
-						<button type="submit">
+						<button type="button" onClick={handleBack}>
 							<img src={PopupAr} alt="PopupAr" />
 						</button>
-						<button type="submit">Продолжить</button>
+						<button type="button" onClick={handleNext}>
+							Продолжить
+						</button>
 					</div>
 				</form>
 			</section>

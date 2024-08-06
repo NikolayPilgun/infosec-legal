@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Popup1 from "../../assets/Popup/popup1.svg";
 import Popup2 from "../../assets/Popup/popup2.svg";
 import Popup3 from "../../assets/Popup/popup3.svg";
@@ -7,18 +7,33 @@ import PopupI from "../../assets/Popup/popupI.svg";
 import popupYes from "../../assets/Popup/popupYes.svg";
 import styles from "./PopupSix.module.css";
 
-const PopupSix: React.FC = () => {
-	const [email, setEmail] = useState("");
-	const [phone, setPhone] = useState("");
+interface FormData {
+	email: string;
+	phone: string;
+	[key: string]: string | boolean;
+}
 
-	const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setEmail(event.target.value);
+interface PopupSixProps {
+	formData: FormData;
+	setFormData: (data: FormData) => void;
+	handleNext: () => void;
+	handleBack: () => void;
+}
+
+const PopupSix: React.FC<PopupSixProps> = ({
+	formData,
+	setFormData,
+	handleNext,
+	handleBack,
+}) => {
+	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setFormData({ ...formData, email: e.target.value });
 	};
 
-	const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const value = event.target.value;
+	const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { value } = e.target;
 		if (/^\d*$/.test(value)) {
-			setPhone(value);
+			setFormData({ ...formData, phone: value });
 		}
 	};
 
@@ -27,13 +42,13 @@ const PopupSix: React.FC = () => {
 		return emailRegex.test(email);
 	};
 
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		if (!validateEmail(email)) {
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		if (!validateEmail(formData.email)) {
 			alert("Введите корректный e-mail");
 			return;
 		}
-		// handle form submission
+		handleNext();
 	};
 
 	const steps = [
@@ -60,7 +75,6 @@ const PopupSix: React.FC = () => {
 		<>
 			<section className={styles.headerSection}>
 				<div className={styles.diamond}></div>
-
 				<h2>
 					Бесплатная проверка организации на соответствие требованиям
 					Федерального закона “О персональных данных” от 27.06.2006г.
@@ -84,13 +98,13 @@ const PopupSix: React.FC = () => {
 						<input
 							className={styles.inputField}
 							placeholder="E-mail"
-							value={email}
+							value={formData.email}
 							onChange={handleEmailChange}
 						/>
 						<input
 							className={styles.inputField}
 							placeholder="Номер телефона"
-							value={phone}
+							value={formData.phone}
 							onChange={handlePhoneChange}
 						/>
 					</div>
@@ -103,6 +117,9 @@ const PopupSix: React.FC = () => {
 						</span>
 					</div>
 					<div className={styles.formButton}>
+						<button type="button" onClick={handleBack}>
+							Назад
+						</button>
 						<button type="submit">Выслать на почту</button>
 					</div>
 				</form>

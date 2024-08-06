@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Popup1 from "../../assets/Popup/popup1.svg";
 import Popup2 from "../../assets/Popup/popup2.svg";
 import Popup3 from "../../assets/Popup/popup3.svg";
@@ -8,14 +8,31 @@ import PopupI from "../../assets/Popup/popupI.svg";
 import popupYes from "../../assets/Popup/popupYes.svg";
 import styles from "./PopupTwo.module.css";
 
-const PopupTwo: React.FC = () => {
-	const [employeesCount, setEmployeesCount] = useState("");
+interface FormData {
+	employeesCount: string;
+	[key: string]: unknown;
+}
 
-	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const value = event.target.value;
-		// Регулярное выражение для разрешения только цифр
+interface PopupTwoProps {
+	formData: FormData;
+	setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+	handleNext: () => void;
+	handleBack: () => void;
+}
+
+const PopupTwo: React.FC<PopupTwoProps> = ({
+	formData,
+	setFormData,
+	handleNext,
+	handleBack,
+}) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
 		if (/^\d*$/.test(value)) {
-			setEmployeesCount(value);
+			setFormData((prevState) => ({
+				...prevState,
+				[name]: value,
+			}));
 		}
 	};
 
@@ -70,7 +87,8 @@ const PopupTwo: React.FC = () => {
 						<input
 							className={styles.inputField}
 							placeholder="Количество штатных сотрудников"
-							value={employeesCount}
+							name="employeesCount"
+							value={formData.employeesCount}
 							onChange={handleInputChange}
 						/>
 						<label className={styles.checkboxLabel}>
@@ -87,10 +105,12 @@ const PopupTwo: React.FC = () => {
 						</span>
 					</div>
 					<div className={styles.formButton}>
-						<button type="submit">
+						<button type="button" onClick={handleBack}>
 							<img src={PopupAr} alt="PopupAr" />
 						</button>
-						<button type="submit">Продолжить</button>
+						<button type="button" onClick={handleNext}>
+							Продолжить
+						</button>
 					</div>
 				</form>
 			</section>

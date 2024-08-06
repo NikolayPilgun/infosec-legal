@@ -65,7 +65,7 @@ const PopupSeven: React.FC<PopupSevenProps> = ({ onClose }) => {
 						</p>
 					</div>
 					<div className={styles.formButton}>
-						<button type="submit" onClick={onClose}>
+						<button type="button" onClick={onClose}>
 							Закрыть
 						</button>
 					</div>

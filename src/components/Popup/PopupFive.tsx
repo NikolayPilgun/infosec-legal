@@ -8,7 +8,12 @@ import popupStatus from "../../assets/Popup/popupStatus.svg";
 import popupYes from "../../assets/Popup/popupYes.svg";
 import styles from "./PopupFive.module.css";
 
-const PopupFive: React.FC = () => {
+interface PopupFiveProps {
+	handleNext: () => void;
+	handleBack: () => void;
+}
+
+const PopupFive: React.FC<PopupFiveProps> = ({ handleNext, handleBack }) => {
 	const steps = [
 		{
 			img1: popupYes,
@@ -57,7 +62,7 @@ const PopupFive: React.FC = () => {
 					<div className={styles.itemStatus}>
 						<h3>Синхронизация данных</h3>
 						<p>
-							В соответствии со сведениями информационный системы Федеральной
+							В соответствии со сведениями информационной системы Федеральной
 							службы по надзору в сфере связи, информационных технологий и
 							массовых коммуникаций
 						</p>
@@ -80,7 +85,12 @@ const PopupFive: React.FC = () => {
 						</p>
 					</div>
 					<div className={styles.formButton}>
-						<button type="submit">Получить полный отчет</button>
+						<button type="button" onClick={handleBack}>
+							Назад
+						</button>
+						<button type="button" onClick={handleNext}>
+							Получить полный отчет
+						</button>
 					</div>
 				</div>
 			</section>

@@ -7,7 +7,48 @@ import PopupG from "../../assets/Popup/popupG.svg";
 import popupYes from "../../assets/Popup/popupYes.svg";
 import styles from "./PopupThree.module.css";
 
-const PopupThree: React.FC = () => {
+interface StorageTypes {
+	paper: boolean;
+	electronic: boolean;
+}
+
+interface DigitalSignatureUses {
+	tenders: boolean;
+	documents: boolean;
+	reporting: boolean;
+	notUsed: boolean;
+}
+
+interface FormData {
+	storageTypes: StorageTypes;
+	digitalSignatureUses: DigitalSignatureUses;
+}
+
+interface PopupThreeProps {
+	formData: FormData;
+	setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+	handleNext: () => void;
+	handleBack: () => void;
+}
+
+const PopupThree: React.FC<PopupThreeProps> = ({
+	formData,
+	setFormData,
+	handleNext,
+	handleBack,
+}) => {
+	const handleInputChange =
+		(
+			field: keyof StorageTypes | keyof DigitalSignatureUses,
+			type: keyof FormData
+		) =>
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			setFormData((prevState) => ({
+				...prevState,
+				[type]: { ...prevState[type], [field]: e.target.checked },
+			}));
+		};
+
 	const steps = [
 		{
 			img1: popupYes,
@@ -60,10 +101,20 @@ const PopupThree: React.FC = () => {
 						</h3>
 						<div className={styles.checkboxes}>
 							<label>
-								<input type="checkbox" />В бумажном виде
+								<input
+									type="checkbox"
+									checked={formData.storageTypes.paper}
+									onChange={handleInputChange("paper", "storageTypes")}
+								/>{" "}
+								В бумажном виде
 							</label>
 							<label>
-								<input type="checkbox" />В электронном виде
+								<input
+									type="checkbox"
+									checked={formData.storageTypes.electronic}
+									onChange={handleInputChange("electronic", "storageTypes")}
+								/>{" "}
+								В электронном виде
 							</label>
 						</div>
 					</div>
@@ -74,28 +125,58 @@ const PopupThree: React.FC = () => {
 						</h3>
 						<div className={styles.checkboxes}>
 							<label>
-								<input type="checkbox" />
+								<input
+									type="checkbox"
+									checked={formData.digitalSignatureUses.tenders}
+									onChange={handleInputChange(
+										"tenders",
+										"digitalSignatureUses"
+									)}
+								/>{" "}
 								Для участия в тендерах
 							</label>
 							<label>
-								<input type="checkbox" />
+								<input
+									type="checkbox"
+									checked={formData.digitalSignatureUses.documents}
+									onChange={handleInputChange(
+										"documents",
+										"digitalSignatureUses"
+									)}
+								/>{" "}
 								Для подписи документов
 							</label>
 							<label>
-								<input type="checkbox" />
+								<input
+									type="checkbox"
+									checked={formData.digitalSignatureUses.reporting}
+									onChange={handleInputChange(
+										"reporting",
+										"digitalSignatureUses"
+									)}
+								/>{" "}
 								Для сдачи отчетности
 							</label>
 							<label>
-								<input type="checkbox" />
+								<input
+									type="checkbox"
+									checked={formData.digitalSignatureUses.notUsed}
+									onChange={handleInputChange(
+										"notUsed",
+										"digitalSignatureUses"
+									)}
+								/>{" "}
 								ЭЦП не применяется
 							</label>
 						</div>
 					</div>
 					<div className={styles.formButton}>
-						<button type="submit">
+						<button type="button" onClick={handleBack}>
 							<img src={PopupAr} alt="PopupAr" />
 						</button>
-						<button type="submit">Продолжить</button>
+						<button type="button" onClick={handleNext}>
+							Продолжить
+						</button>
 					</div>
 				</form>
 			</section>
