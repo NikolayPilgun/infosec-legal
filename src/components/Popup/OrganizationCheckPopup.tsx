@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import FocusLock from "react-focus-lock";
 import { Organization } from "../../data/organizations";
 import styles from "./OrganizationCheckPopup.module.css";
+import PopupSeven from "./PopupSeven";
 // import PopupFive from "./PopupFive";
-import PopupSix from "./PopupSix.";
+// import PopupSix from "./PopupSix.";
 // import PopupFour from "./PopupFour";
 // import PopupTwo from "./PopupTwo";
 // import PopupThree from "./PopupThree";
@@ -61,7 +62,8 @@ const OrganizationCheckPopup: React.FC<OrganizationCheckPopupProps> = ({
 						// <PopupThree />
 						// <PopupFour />
 						// <PopupFive />
-						<PopupSix />
+						// <PopupSix />
+						<PopupSeven onClose={onClose} />
 					) : (
 						<h2>Организация не найдена</h2>
 					)}
