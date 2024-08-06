@@ -1,0 +1,137 @@
+.headerSection {
+	padding: 20px 40px;
+	background-color: #f8faff;
+	height: 260px;
+	position: relative;
+	border-top: 6px solid #6c30d326;
+}
+
+.headerSection::before {
+	content: "";
+	position: absolute;
+	top: -6px;
+	left: 0;
+	width: 90%;
+	height: 6px;
+	background-color: green;
+}
+
+.popupMessage {
+	padding: 5px;
+	position: absolute;
+	top: 3px;
+	left: 90%;
+	z-index: 50;
+	background-color: white;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popupMessage span {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 16px;
+}
+
+.diamond {
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	bottom: -25px;
+	left: 49%;
+	background-color: white;
+	transform: translate(0, -50%) rotate(45deg);
+}
+
+.headerSection h2 {
+	width: 70%;
+	font-size: 24px;
+	line-height: 30px;
+	text-align: left;
+	color: #001b55;
+	margin-bottom: 30px;
+	margin-top: 20px;
+}
+
+.steps {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.stepItem {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 300px;
+	text-align: center;
+}
+
+.stepItem span:nth-child(1) {
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.stepItem span :nth-child(1) {
+	position: absolute;
+	top: -5px;
+	left: 0px;
+	width: 28px;
+	height: 28px;
+}
+
+.bodySection {
+	padding: 40px 40px 20px;
+}
+
+.containerStatus {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 20px;
+}
+
+.itemStatus {
+	flex: 0 1 45%;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 30px;
+}
+.itemStatus h3 {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 22px;
+	text-align: left;
+	color: #001b55;
+	margin-bottom: 30px;
+}
+.itemStatus p {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 22px;
+	text-align: left;
+	margin-bottom: 10px;
+}
+.itemStatus p img {
+	margin-right: 10px;
+}
+
+.formButton {
+	flex: 1 1 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.formButton button {
+	width: 260px;
+	height: 50px;
+	background-color: #011f60;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	font-size: 16px;
+	line-height: 16px;
+}
