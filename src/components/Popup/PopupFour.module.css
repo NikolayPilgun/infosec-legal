@@ -1,0 +1,159 @@
+.headerSection {
+	padding: 20px 40px;
+	background-color: #f8faff;
+	height: 260px;
+	position: relative;
+	border-top: 6px solid #6c30d326;
+}
+
+.headerSection::before {
+	content: "";
+	position: absolute;
+	top: -6px;
+	left: 0;
+	width: 86%;
+	height: 6px;
+	background-color: green;
+}
+
+.popupMessage {
+	padding: 5px;
+	position: absolute;
+	top: 3px;
+	left: 86%;
+	z-index: 50;
+	background-color: white;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popupMessage span {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 16px;
+}
+
+.diamond {
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	bottom: -25px;
+	left: 17%;
+	background-color: white;
+	transform: translate(0, -50%) rotate(45deg);
+}
+
+.headerSection h2 {
+	width: 70%;
+	font-size: 24px;
+	line-height: 30px;
+	text-align: left;
+	color: #001b55;
+	margin-bottom: 30px;
+	margin-top: 20px;
+}
+
+.steps {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.stepItem {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 300px;
+	text-align: center;
+}
+
+.stepItem span:nth-child(1) {
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.stepItem span :nth-child(1) {
+	position: absolute;
+	top: -5px;
+	left: 0px;
+	width: 28px;
+	height: 28px;
+}
+
+.bodySection {
+	padding: 40px 40px 20px;
+}
+
+.bodySection form {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 20px;
+}
+
+.inputs {
+	flex: 1 1 100%;
+	display: flex;
+	flex-direction: column;
+}
+.inputs h3 {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 22px;
+	text-align: left;
+	color: #001b55;
+	margin-bottom: 30px;
+}
+
+.checkboxes {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 50px;
+	margin-bottom: 50px;
+}
+.checkboxes label {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 16px;
+	line-height: 16px;
+}
+
+.checkboxes label input {
+	width: 25px;
+	height: 25px;
+}
+
+.formButton {
+	flex: 1 1 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.formButton > :nth-child(1) {
+	width: 50px;
+	height: 50px;
+	background-color: #011f601a;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.formButton > :nth-child(1) img {
+	width: 24px;
+	height: 24px;
+}
+
+.formButton > :nth-child(2) {
+	width: 200px;
+	height: 50px;
+	background-color: #011f60;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	font-size: 16px;
+	line-height: 16px;
+}
