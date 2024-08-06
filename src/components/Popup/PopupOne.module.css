@@ -3,6 +3,40 @@
 	background-color: #f8faff;
 	height: 260px;
 	position: relative;
+	border-top: 6px solid #6c30d326;
+}
+.headerSection::before {
+	content: "";
+	position: absolute;
+	top: -6px;
+	left: 0;
+	width: 25%;
+	height: 6px;
+	background-color: green;
+}
+.popupMessage {
+	padding: 5px;
+	position: absolute;
+	top: 3px;
+	left: 25%;
+	z-index: 50;
+	background-color: white;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+.popupMessage {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 16px;
+}
+
+.diamond {
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	bottom: -25px;
+	left: 17%;
+	background-color: white;
+	transform: translate(0, -50%) rotate(45deg);
 }
 .headerSection h2 {
 	width: 70%;
@@ -36,16 +70,6 @@
 	left: 0px;
 }
 
-.diamond {
-	width: 25px;
-	height: 25px;
-	position: absolute;
-	bottom: -25px;
-	left: 17%;
-	background-color: white;
-	transform: translate(0, -50%) rotate(45deg);
-}
-
 .bodySection {
 	padding: 40px 40px 20px;
 }
@@ -64,7 +88,7 @@
 }
 .formGroup {
 	flex: 1 1 40%;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	position: relative;
 }
 
@@ -84,7 +108,8 @@
 	left: -8px;
 	background-color: #ffffff;
 }
-.formGroup input {
+
+.input {
 	width: 90%;
 	height: 60px;
 	border-radius: 10px;
@@ -93,13 +118,21 @@
 	line-height: 16px;
 	padding: 0px 20px;
 }
-.formGroup .errorMsg {
-	position: absolute;
-	top: 50%;
-	right: 5px;
-	transform: translateY(-50%);
+
+.inputValid {
+	border-color: green;
+}
+
+.inputInvalid {
+	border-color: red;
+}
+
+.errorMessage {
 	color: red;
 	font-size: 12px;
+	position: absolute;
+	bottom: -20px;
+	left: 5px;
 }
 
 .formButton {
