@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React, { useState } from "react";
 
+import organizations, { Organization } from "../../data/organizations";
 import OrganizationCheckPopup from "../Popup/OrganizationCheckPopup";
 import styles from "./CheckFormBlock.module.css";
 
@@ -24,6 +25,7 @@ const CheckFormBlock: React.FC<CheckFormBlockProps> = ({
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
 	const [inn, setInn] = useState("");
 	const [error, setError] = useState("");
+	const [organization, setOrganization] = useState<Organization | null>(null);
 
 	const validateInn = (value: string) => {
 		const innPattern = /^\d{10,12}$/;
@@ -45,11 +47,19 @@ const CheckFormBlock: React.FC<CheckFormBlockProps> = ({
 			setError("ИНН должен содержать от 10 до 12 цифр.");
 			return;
 		}
+		const foundOrganization = organizations.find((org) => org.inn === inn);
+		if (foundOrganization) {
+			setOrganization(foundOrganization);
+		} else {
+			setOrganization(null); // Сбросить организацию, если не найдено
+			setError("Организация не найдена.");
+		}
 		setIsPopupOpen(true);
 	};
 
 	const handleClosePopup = () => {
 		setIsPopupOpen(false);
+		setError(""); // Очистить ошибку при закрытии попапа
 	};
 
 	return (
@@ -80,6 +90,7 @@ const CheckFormBlock: React.FC<CheckFormBlockProps> = ({
 				<OrganizationCheckPopup
 					isOpen={isPopupOpen}
 					onClose={handleClosePopup}
+					organization={organization}
 				/>
 			)}
 		</div>

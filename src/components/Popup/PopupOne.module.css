@@ -1,0 +1,136 @@
+.headerSection {
+	padding: 20px 40px;
+	background-color: #f8faff;
+	height: 260px;
+	position: relative;
+}
+.headerSection h2 {
+	width: 70%;
+	font-size: 24px;
+	line-height: 30px;
+	text-align: left;
+	color: #001b55;
+	margin-bottom: 30px;
+	margin-top: 20px;
+}
+.steps {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+.stepItem {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 300px;
+	text-align: center;
+}
+.stepItem span:nth-child(1) {
+	position: relative;
+	margin-bottom: 10px;
+}
+.stepItem span :nth-child(1) {
+	position: absolute;
+	top: -5px;
+	left: 0px;
+}
+
+.diamond {
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	bottom: -25px;
+	left: 17%;
+	background-color: white;
+	transform: translate(0, -50%) rotate(45deg);
+}
+
+.bodySection {
+	padding: 40px 40px 20px;
+}
+.bodySection h3 {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 16px;
+	text-align: left;
+	margin-bottom: 50px;
+	color: #001b55;
+}
+.bodySection form {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+.formGroup {
+	flex: 1 1 40%;
+	margin-bottom: 20px;
+	position: relative;
+}
+
+.formGroup label {
+	position: absolute;
+	top: -12px;
+	left: 20px;
+	padding: 5px 5px;
+	background-color: #ffffff;
+	color: #001b55;
+	font-size: 14px;
+	line-height: 16px;
+}
+.formGroup img {
+	position: absolute;
+	top: 22px;
+	left: -8px;
+	background-color: #ffffff;
+}
+.formGroup input {
+	width: 90%;
+	height: 60px;
+	border-radius: 10px;
+	border: 1px solid;
+	font-size: 16px;
+	line-height: 16px;
+	padding: 0px 20px;
+}
+.formGroup .errorMsg {
+	position: absolute;
+	top: 50%;
+	right: 5px;
+	transform: translateY(-50%);
+	color: red;
+	font-size: 12px;
+}
+
+.formButton {
+	flex: 1 1 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.info {
+	flex: 0 1 40%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 10px;
+}
+.info span {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16px;
+	color: #5f5f5f;
+}
+
+.formButton button {
+	width: 200px;
+	height: 50px;
+	background-color: #011f60;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	font-size: 16px;
+	line-height: 16px;
+}

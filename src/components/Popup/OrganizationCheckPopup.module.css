@@ -4,7 +4,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(7, 13, 56, 0.95);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -13,13 +13,8 @@
 
 .popupContent {
 	background: white;
-	padding: 20px;
-	border-radius: 8px;
 	width: 90vw; /* 90% ширины окна */
 	height: 90vh; /* 90% высоты окна */
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
 	overflow-y: auto;
 	position: relative;
 }
@@ -28,65 +23,47 @@
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	background: none;
+	z-index: 10;
+	width: 32px;
+	height: 32px;
 	border: none;
-	font-size: 24px;
-	cursor: pointer;
-}
-
-.steps {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	margin-bottom: 20px;
-}
-
-.steps div {
-	display: flex;
-	align-items: center;
-}
-
-.formGroup {
-	margin-bottom: 16px;
-}
-
-label {
-	display: block;
-	margin-bottom: 8px;
-}
-
-input {
-	width: 100%;
-	padding: 8px;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-}
-
-.errorInput {
-	border-color: red;
-}
-
-.errorMessage {
-	color: red;
-	font-size: 12px;
-}
-
-button[type="submit"] {
-	background: blue;
+	border-radius: 50%;
+	background-color: rgb(120, 120, 120);
 	color: white;
-	padding: 10px 20px;
-	border: none;
-	border-radius: 4px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	cursor: pointer;
+	transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
-	background: darkblue;
+.closeButton .cross {
+	position: relative;
+	width: 16px;
+	height: 16px;
+	display: block;
 }
 
-.info {
-	font-size: 12px;
-	color: gray;
-	margin-top: 20px;
+.closeButton .cross::before,
+.closeButton .cross::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 2px;
+	background-color: white;
+	top: 50%;
+	left: 50%;
+	transform-origin: center;
+}
+
+.closeButton .cross::before {
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.closeButton .cross::after {
+	transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.closeButton:hover {
+	background-color: #d00;
 }

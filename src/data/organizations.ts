@@ -12,7 +12,7 @@ interface Certificate {
 	pdfLink: string;
 }
 
-interface Organization {
+export interface Organization {
 	id: string;
 	date: string;
 	name: string;
