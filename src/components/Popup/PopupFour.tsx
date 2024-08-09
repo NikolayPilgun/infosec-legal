@@ -10,7 +10,7 @@ import styles from "./PopupFour.module.css";
 interface SecurityAssessment {
 	yes: boolean;
 	no: boolean;
-	unknown: boolean;
+	unknownOption: boolean; // Измененное имя поля
 }
 
 interface FormData {
@@ -31,17 +31,17 @@ const PopupFour: React.FC<PopupFourProps> = ({
 	handleNext,
 	handleBack,
 }) => {
-	const handleInputChange =
-		(field: keyof SecurityAssessment) =>
-		(e: React.ChangeEvent<HTMLInputElement>) => {
-			setFormData((prevState) => ({
-				...prevState,
-				securityAssessment: {
-					...prevState.securityAssessment,
-					[field]: e.target.checked,
-				},
-			}));
-		};
+	const handleInputChange = (field: keyof SecurityAssessment) => () => {
+		setFormData((prevState) => ({
+			...prevState,
+			securityAssessment: {
+				yes: false,
+				no: false,
+				unknownOption: false,
+				[field]: true,
+			},
+		}));
+	};
 
 	const steps = [
 		{
@@ -109,8 +109,8 @@ const PopupFour: React.FC<PopupFourProps> = ({
 						<label>
 							<input
 								type="checkbox"
-								checked={formData.securityAssessment.unknown}
-								onChange={handleInputChange("unknown")}
+								checked={formData.securityAssessment.unknownOption}
+								onChange={handleInputChange("unknownOption")}
 							/>{" "}
 							Не знаю
 						</label>

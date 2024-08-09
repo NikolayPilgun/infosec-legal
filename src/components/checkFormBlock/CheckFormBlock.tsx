@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import React, { useState } from "react";
-
 import organizations, { Organization } from "../../data/organizations";
 import OrganizationCheckPopup from "../Popup/OrganizationCheckPopup";
 import styles from "./CheckFormBlock.module.css";
@@ -26,20 +25,18 @@ const CheckFormBlock: React.FC<CheckFormBlockProps> = ({
 	const [inn, setInn] = useState("");
 	const [error, setError] = useState("");
 	const [organization, setOrganization] = useState<Organization | null>(null);
+	const [formData, setFormData] = useState({});
 
-	const validateInn = (value: string) => {
-		const innPattern = /^\d{10,12}$/;
-		return innPattern.test(value);
-	};
+	const validateInn = (value: string) => /^\d{10,12}$/.test(value);
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
-		if (validateInn(value) || value === "") {
-			setError("");
-		} else {
-			setError("ИНН должен содержать от 10 до 12 цифр.");
-		}
 		setInn(value);
+		setError(
+			validateInn(value) || value === ""
+				? ""
+				: "ИНН должен содержать от 10 до 12 цифр."
+		);
 	};
 
 	const handleButtonClick = () => {
@@ -50,16 +47,42 @@ const CheckFormBlock: React.FC<CheckFormBlockProps> = ({
 		const foundOrganization = organizations.find((org) => org.inn === inn);
 		if (foundOrganization) {
 			setOrganization(foundOrganization);
+			setFormData({
+				inn: foundOrganization.inn,
+				ogrn: foundOrganization.ogrn,
+				shortName: foundOrganization.shortName,
+				fullName: foundOrganization.fullName,
+				employeesCount: "",
+				email: "",
+				phone: "",
+				storageTypes: {
+					paper: false,
+					electronic: false,
+				},
+				digitalSignatureUses: {
+					tenders: false,
+					documents: false,
+					reporting: false,
+					notUsed: false,
+				},
+				securityAssessment: {
+					yes: false,
+					no: false,
+					unknownOption: false,
+				},
+			});
+			setError("");
+			setIsPopupOpen(true);
 		} else {
-			setOrganization(null); // Сбросить организацию, если не найдено
+			setFormData({});
+			setOrganization(null);
 			setError("Организация не найдена.");
 		}
-		setIsPopupOpen(true);
 	};
 
 	const handleClosePopup = () => {
 		setIsPopupOpen(false);
-		setError(""); // Очистить ошибку при закрытии попапа
+		setError(""); // Clear error when closing popup
 	};
 
 	return (
@@ -82,6 +105,7 @@ const CheckFormBlock: React.FC<CheckFormBlockProps> = ({
 				<button
 					className={classNames(styles.button, buttonClassName)}
 					onClick={handleButtonClick}
+					disabled={!validateInn(inn)}
 				>
 					Проверить
 				</button>
@@ -91,6 +115,7 @@ const CheckFormBlock: React.FC<CheckFormBlockProps> = ({
 					isOpen={isPopupOpen}
 					onClose={handleClosePopup}
 					organization={organization}
+					initialFormData={formData}
 				/>
 			)}
 		</div>

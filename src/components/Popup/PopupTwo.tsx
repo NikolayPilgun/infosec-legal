@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Popup1 from "../../assets/Popup/popup1.svg";
 import Popup2 from "../../assets/Popup/popup2.svg";
 import Popup3 from "../../assets/Popup/popup3.svg";
@@ -10,6 +10,7 @@ import styles from "./PopupTwo.module.css";
 
 interface FormData {
 	employeesCount: string;
+	hasGigEmployees: boolean;
 	[key: string]: unknown;
 }
 
@@ -28,13 +29,29 @@ const PopupTwo: React.FC<PopupTwoProps> = ({
 }) => {
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
-		if (/^\d*$/.test(value)) {
-			setFormData((prevState) => ({
-				...prevState,
-				[name]: value,
-			}));
-		}
+		setFormData((prevState) => ({
+			...prevState,
+			[name]: value,
+		}));
 	};
+
+	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { checked } = e.target;
+		setFormData((prevState) => ({
+			...prevState,
+			hasGigEmployees: checked,
+		}));
+	};
+
+	useEffect(() => {
+		// Ensure all fields have default initial values
+		if (formData.employeesCount === undefined) {
+			setFormData((prev) => ({ ...prev, employeesCount: "" }));
+		}
+		if (formData.hasGigEmployees === undefined) {
+			setFormData((prev) => ({ ...prev, hasGigEmployees: false }));
+		}
+	}, [setFormData, formData]);
 
 	const steps = [
 		{
@@ -63,7 +80,6 @@ const PopupTwo: React.FC<PopupTwoProps> = ({
 				<div className={styles.popupMessage}>
 					<span>47%</span>
 				</div>
-
 				<h2>
 					Бесплатная проверка организации на соответствие требованиям
 					Федерального закона “О персональных данных” от 27.06.2006г.
@@ -88,11 +104,16 @@ const PopupTwo: React.FC<PopupTwoProps> = ({
 							className={styles.inputField}
 							placeholder="Количество штатных сотрудников"
 							name="employeesCount"
-							value={formData.employeesCount}
+							value={formData.employeesCount || ""}
 							onChange={handleInputChange}
 						/>
 						<label className={styles.checkboxLabel}>
-							<input className={styles.checkbox} type="checkbox" />
+							<input
+								className={styles.checkbox}
+								type="checkbox"
+								checked={formData.hasGigEmployees || false}
+								onChange={handleCheckboxChange}
+							/>
 							Наличие сотрудников по ГПХ
 						</label>
 					</div>

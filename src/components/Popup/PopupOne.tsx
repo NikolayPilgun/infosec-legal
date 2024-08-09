@@ -13,12 +13,12 @@ interface FormData {
 	ogrn: string;
 	shortName: string;
 	fullName: string;
-	[key: string]: unknown; // для других полей формы
+	[key: string]: unknown;
 }
 
 interface PopupOneProps {
 	formData: FormData;
-	setFormData: React.Dispatch<React.SetStateAction<FormData>>; // уточняем тип здесь
+	setFormData: React.Dispatch<React.SetStateAction<FormData>>;
 	handleNext: () => void;
 }
 
@@ -27,52 +27,68 @@ const PopupOne: React.FC<PopupOneProps> = ({
 	setFormData,
 	handleNext,
 }) => {
+	const [errors, setErrors] = React.useState<Record<string, boolean>>({});
+
+	const validateField = (field: keyof FormData, value: string) => {
+		switch (field) {
+			case "inn":
+				return /^\d{10,12}$/.test(value); // INN validation (adjusted range)
+			case "ogrn":
+				return /^\d{13}$/.test(value); // OGRN validation
+			case "shortName":
+			case "fullName":
+				return (
+					/^[a-zA-Zа-яА-ЯёЁ0-9'" ]*$/.test(value) && value.trim().length > 0
+				); // Name validation
+			default:
+				return true;
+		}
+	};
+
 	const handleInputChange =
 		(field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement>) => {
+			const newValue = e.target.value;
 			setFormData((prevState) => ({
 				...prevState,
-				[field]: e.target.value,
+				[field]: newValue,
+			}));
+
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				[field]: !validateField(field, newValue),
 			}));
 		};
 
-	const getValidationImage = (originalValue: string, currentValue: string) => {
-		return originalValue === currentValue ? popupYes : popupNo;
-	};
-
-	const getInputStyle = (originalValue: string, currentValue: string) => {
-		return originalValue === currentValue
-			? `${styles.input} ${styles.inputValid}`
-			: `${styles.input} ${styles.inputInvalid}`;
-	};
-
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		handleNext();
+		if (!Object.values(errors).some(Boolean)) {
+			handleNext();
+		}
 	};
 
 	const formFields = [
 		{
 			label: "ИНН Организации",
 			value: formData.inn,
-			originalValue: formData.inn,
+			fieldName: "inn",
 			onChange: handleInputChange("inn"),
 		},
 		{
 			label: "ОГРН/ОГРНИП Организации",
 			value: formData.ogrn,
-			originalValue: formData.ogrn,
+			fieldName: "ogrn",
 			onChange: handleInputChange("ogrn"),
 		},
 		{
 			label: "Краткое наименование организации",
 			value: formData.shortName,
-			originalValue: formData.shortName,
+			fieldName: "shortName",
 			onChange: handleInputChange("shortName"),
 		},
 		{
 			label: "Полное наименование организации",
 			value: formData.fullName,
-			originalValue: formData.fullName,
+			fieldName: "fullName",
 			onChange: handleInputChange("fullName"),
 		},
 	];
@@ -125,18 +141,24 @@ const PopupOne: React.FC<PopupOneProps> = ({
 				<form onSubmit={handleSubmit}>
 					{formFields.map((field, index) => (
 						<div className={styles.formGroup} key={index}>
-							<img
-								src={getValidationImage(field.originalValue, field.value)}
-								alt="validationIcon"
-							/>
 							<label>{field.label}</label>
-							<input
-								type="text"
-								className={getInputStyle(field.originalValue, field.value)}
-								value={field.value}
-								onChange={field.onChange}
-							/>
-							{field.value !== field.originalValue && (
+							<div className={styles.inputWrapper}>
+								<input
+									type="text"
+									className={`${styles.input} ${
+										errors[field.fieldName]
+											? styles.inputInvalid
+											: styles.inputValid
+									}`}
+									value={field.value}
+									onChange={field.onChange}
+								/>
+								<img
+									src={errors[field.fieldName] ? popupNo : popupYes}
+									alt={errors[field.fieldName] ? "Invalid" : "Valid"}
+								/>
+							</div>
+							{errors[field.fieldName] && (
 								<span className={styles.errorMessage}>
 									Это поле заполнено неверно
 								</span>
@@ -152,7 +174,12 @@ const PopupOne: React.FC<PopupOneProps> = ({
 								информационной системы Федеральной налоговой службы РФ
 							</span>
 						</p>
-						<button type="submit">Продолжить</button>
+						<button
+							type="submit"
+							disabled={Object.values(errors).some((isError) => isError)}
+						>
+							Продолжить
+						</button>
 					</div>
 				</form>
 			</section>

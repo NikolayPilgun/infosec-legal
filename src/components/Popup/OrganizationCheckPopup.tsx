@@ -14,58 +14,27 @@ interface OrganizationCheckPopupProps {
 	isOpen: boolean;
 	onClose: () => void;
 	organization: Organization | null;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	initialFormData: any;
 }
 
 const OrganizationCheckPopup: React.FC<OrganizationCheckPopupProps> = ({
 	isOpen,
 	onClose,
 	organization,
+	initialFormData,
 }) => {
 	const [step, setStep] = useState(1);
-	const [formData, setFormData] = useState(() => {
-		const savedData = localStorage.getItem("formData");
-		return savedData
-			? JSON.parse(savedData)
-			: {
-					inn: organization?.inn || "",
-					ogrn: organization?.ogrn || "",
-					shortName: organization?.shortName || "",
-					fullName: organization?.fullName || "",
-					employeesCount: "",
-					email: "",
-					phone: "",
-					storageTypes: {
-						paper: false,
-						electronic: false,
-					},
-					digitalSignatureUses: {
-						tenders: false,
-						documents: false,
-						reporting: false,
-						notUsed: false,
-					},
-					securityAssessment: {
-						yes: false,
-						no: false,
-						unknown: false,
-					},
-					// eslint-disable-next-line no-mixed-spaces-and-tabs
-			  };
-	});
+	const [formData, setFormData] = useState(initialFormData);
 
 	useEffect(() => {
 		if (isOpen) {
 			document.body.style.overflow = "hidden";
-			document
-				.getElementsByTagName("main")[0]
-				?.setAttribute("aria-hidden", "true");
 		} else {
 			document.body.style.overflow = "auto";
-			document.getElementsByTagName("main")[0]?.removeAttribute("aria-hidden");
 		}
 		return () => {
 			document.body.style.overflow = "auto";
-			document.getElementsByTagName("main")[0]?.removeAttribute("aria-hidden");
 		};
 	}, [isOpen]);
 

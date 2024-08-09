@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Popup1 from "../../assets/Popup/popup1.svg";
 import Popup2 from "../../assets/Popup/popup2.svg";
 import Popup3 from "../../assets/Popup/popup3.svg";
@@ -26,29 +26,51 @@ const PopupSix: React.FC<PopupSixProps> = ({
 	handleNext,
 	handleBack,
 }) => {
+	const [emailValid, setEmailValid] = useState(true);
+	const [phoneValid, setPhoneValid] = useState(true);
+	const [isEmailFilled, setIsEmailFilled] = useState(false);
+	const [isPhoneFilled, setIsPhoneFilled] = useState(false);
+
+	useEffect(() => {
+		if (!formData.email) {
+			setFormData({ ...formData, email: "" });
+		}
+		if (!formData.phone) {
+			setFormData({ ...formData, phone: "" });
+		}
+	}, []);
+
 	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setFormData({ ...formData, email: e.target.value });
+		const email = e.target.value;
+		setFormData({ ...formData, email });
+		setEmailValid(validateEmail(email));
+		setIsEmailFilled(email.trim() !== "");
 	};
 
 	const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { value } = e.target;
-		if (/^\d*$/.test(value)) {
-			setFormData({ ...formData, phone: value });
-		}
+		const phone = e.target.value;
+		setFormData({ ...formData, phone });
+		setPhoneValid(validatePhone(phone));
+		setIsPhoneFilled(phone.trim() !== "");
 	};
 
 	const validateEmail = (email: string) => {
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		return emailRegex.test(email);
+		return emailRegex.test(email) && email.trim() !== "";
+	};
+
+	const validatePhone = (phone: string) => {
+		const phoneRegex = /^\d+$/;
+		return phoneRegex.test(phone) && phone.trim() !== "";
 	};
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (!validateEmail(formData.email)) {
-			alert("Введите корректный e-mail");
-			return;
+		if (emailValid && phoneValid) {
+			console.log("Collected Data:", formData);
+			setFormData({ email: "", phone: "" });
+			handleNext();
 		}
-		handleNext();
 	};
 
 	const steps = [
@@ -96,13 +118,19 @@ const PopupSix: React.FC<PopupSixProps> = ({
 				<form onSubmit={handleSubmit}>
 					<div className={styles.inputs}>
 						<input
-							className={styles.inputField}
+							type="email"
+							className={`${styles.inputField} ${
+								!emailValid ? styles.invalid : ""
+							}`}
 							placeholder="E-mail"
 							value={formData.email}
 							onChange={handleEmailChange}
 						/>
 						<input
-							className={styles.inputField}
+							type="tel"
+							className={`${styles.inputField} ${
+								!phoneValid ? styles.invalid : ""
+							}`}
 							placeholder="Номер телефона"
 							value={formData.phone}
 							onChange={handlePhoneChange}
@@ -120,7 +148,14 @@ const PopupSix: React.FC<PopupSixProps> = ({
 						<button type="button" onClick={handleBack}>
 							Назад
 						</button>
-						<button type="submit">Выслать на почту</button>
+						<button
+							type="submit"
+							disabled={
+								!(emailValid && phoneValid && isEmailFilled && isPhoneFilled)
+							}
+						>
+							Выслать на почту
+						</button>
 					</div>
 				</form>
 			</section>
